@@ -3,3 +3,8 @@
 Your custom css here
 
 /////////////////////////////////////////*/
+
+/* margin for about page */
+.about-btm-margin{
+    margin-bottom: 3rem;
+}
