@@ -8,3 +8,29 @@ Your custom css here
 .about-btm-margin{
     margin-bottom: 3rem;
 }
+
+/* Project cover image */
+.bg-img-1 {
+    /* The image used */
+    background-image: url(../img/miles-redemption/miles-redemption-cover.jpg);
+    background-color: lightblue;
+    min-height: 520px;
+
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+/* Remove default body margin */
+  body { 
+    padding: 0; 
+}
+/* Custom margin for containers */
+.body-container{
+    margin-top:120px;
+}
