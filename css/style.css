@@ -96,6 +96,18 @@ a.link:hover::before {
     background: #000
 }
 
+/* Padding for section */
+
+.space-xsm {
+    padding-top: 30px;
+    padding-bottom: 30px
+}
+
+.space-sm {
+    padding-top: 60px;
+    padding-bottom: 60px
+}
+
 .space-md {
     padding-top: 90px;
     padding-bottom: 90px
@@ -212,7 +224,7 @@ Header intro
 }
 
 .headline-content .headline-title {
-    font-weight: 900
+    font-weight: 800
 }
 
 .headline-subtitle {
