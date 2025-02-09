@@ -48,3 +48,11 @@ Your custom css here
 .body-container{
     margin-top:120px;
 }
+
+/* Bottom Nav */
+.nav-link-bottom{
+  padding: 0.25rem;
+  display: inline-block;
+  color: inherit;
+  line-height: normal;
+}
