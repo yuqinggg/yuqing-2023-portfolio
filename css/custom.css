@@ -9,14 +9,28 @@ Your custom css here
     margin-bottom: 3rem;
 }
 
-/* Project cover image */
+/* Project cover image 8000x4500*/
 .bg-img-1 {
     /* The image used */
     background-image: url(../img/miles-redemption/miles-redemption-cover.jpg);
     background-color: #28386B;
     min-height: 520px;
 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+  .bg-img-2 {
+    /* The image used */
+    background-image: url(../img/miles-redemption/miles-redemption-components.jpg);
+    background-color: #28386B;
+    min-height: 520px;
+
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
