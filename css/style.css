@@ -310,7 +310,7 @@ Header intro
     bottom: 0;
     left: 0;
     z-index: 1;
-    background: rgba(50, 109, 221, 0.9);
+    background: rgba(0, 38, 107, 0.8);
     opacity: 0;
     visibility: hidden;
     -webkit-transition: all .2s ease-in-out;
