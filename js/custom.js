@@ -162,4 +162,218 @@ function grid() {
 
 }
 
+// Simple image gallery logic (for research section)
+const galleryImages = [
+    {
+        src: 'img/interlogue/interlogue-cover.avif',
+        caption: 'Interlogue Cover'
+    },
+    {
+        src: 'img/interlogue/interlogue-photo.avif',
+        caption: 'Interlogue Photo'
+    },
+    {
+        src: 'img/interlogue/interlogue-thumbnail.avif',
+        caption: 'Interlogue Thumbnail'
+    }
+];
+let currentIndex = 0;
+const galleryImage = document.getElementById('galleryImage');
+const galleryCaption = document.getElementById('galleryCaption');
+if (galleryImage && galleryCaption) {
+    document.getElementById('galleryPrev').onclick = function() {
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        galleryImage.src = galleryImages[currentIndex].src;
+        galleryCaption.textContent = galleryImages[currentIndex].caption;
+    };
+    document.getElementById('galleryNext').onclick = function() {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        galleryImage.src = galleryImages[currentIndex].src;
+        galleryCaption.textContent = galleryImages[currentIndex].caption;
+    };
+}
+
+// Gallery text page switching
+document.addEventListener('DOMContentLoaded', function() {
+    var page1 = document.getElementById('galleryPage1');
+    var page2 = document.getElementById('galleryPage2');
+    var page3 = document.getElementById('galleryPage3');
+    var dot1 = document.getElementById('sliderDot1');
+    var dot2 = document.getElementById('sliderDot2');
+    var dot3 = document.getElementById('sliderDot3');
+    var nextBtn = document.getElementById('galleryNext');
+    var prevBtn = document.getElementById('galleryPrev');
+    var nextBtnMobile = document.getElementById('galleryNextMobile');
+    var prevBtnMobile = document.getElementById('galleryPrevMobile');
+    var currentPage = 1;
+
+    function showPage(pageNum) {
+        // Hide all pages
+        page1.style.display = 'none';
+        page2.style.display = 'none';
+        page3.style.display = 'none';
+        
+        // Reset all dots
+        dot1.style.background = '#bbb';
+        dot2.style.background = '#bbb';
+        dot3.style.background = '#bbb';
+        
+        // Show selected page and highlight dot
+        if (pageNum === 1) {
+            page1.style.display = '';
+            dot1.style.background = '#333';
+        } else if (pageNum === 2) {
+            page2.style.display = '';
+            dot2.style.background = '#333';
+        } else if (pageNum === 3) {
+            page3.style.display = '';
+            dot3.style.background = '#333';
+        }
+        currentPage = pageNum;
+    }
+
+    function nextPage() {
+        if (currentPage < 3) {
+            showPage(currentPage + 1);
+        } else {
+            showPage(1); // Loop back to first page
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            showPage(currentPage - 1);
+        } else {
+            showPage(3); // Loop to last page
+        }
+    }
+
+    // Add event listeners only if elements exist
+    if(dot1 && dot2 && dot3) {
+        dot1.addEventListener('click', () => showPage(1));
+        dot2.addEventListener('click', () => showPage(2));
+        dot3.addEventListener('click', () => showPage(3));
+    }
+
+    if(nextBtn && prevBtn && nextBtnMobile && prevBtnMobile) {
+        nextBtn.addEventListener('click', nextPage);
+        prevBtn.addEventListener('click', prevPage);
+        nextBtnMobile.addEventListener('click', nextPage);
+        prevBtnMobile.addEventListener('click', prevPage);
+        
+        // Set initial state
+        showPage(1);
+    }
+});
+
+// Final Outcome Photo Gallery Logic
+const finalGalleryImages = [
+    {
+        src: 'img/interlogue/interlogue-cover.jpg',
+        caption: 'Interlogue Cover'
+    },
+    {
+        src: 'img/interlogue/content testing 02.jpg',
+        caption: 'Interlogue Programme in Action'
+    },
+    {
+        src: 'img/interlogue/interlogue-thumbnail.jpg',
+        caption: 'Interlogue Activity Book'
+    }
+];
+let finalGalleryIndex = 0;
+const finalGalleryImage = document.getElementById('finalGalleryImage');
+const finalGalleryCaption = document.getElementById('finalGalleryCaption');
+if (finalGalleryImage && finalGalleryCaption) {
+    document.getElementById('finalGalleryPrev').onclick = function() {
+        finalGalleryIndex = (finalGalleryIndex - 1 + finalGalleryImages.length) % finalGalleryImages.length;
+        finalGalleryImage.src = finalGalleryImages[finalGalleryIndex].src;
+        finalGalleryCaption.textContent = finalGalleryImages[finalGalleryIndex].caption;
+    };
+    document.getElementById('finalGalleryNext').onclick = function() {
+        finalGalleryIndex = (finalGalleryIndex + 1) % finalGalleryImages.length;
+        finalGalleryImage.src = finalGalleryImages[finalGalleryIndex].src;
+        finalGalleryCaption.textContent = finalGalleryImages[finalGalleryIndex].caption;
+    };
+    // Initial display
+    finalGalleryImage.src = finalGalleryImages[finalGalleryIndex].src;
+    finalGalleryCaption.textContent = finalGalleryImages[finalGalleryIndex].caption;
+}
+
+// --- Parallax effect ---
+(function() {
+    var parallaxEls = document.querySelectorAll('.parallax');
+    parallaxEls.forEach(function(img) {
+        var container = img.parentElement;
+        function parallaxScroll() {
+            var rect = container.getBoundingClientRect();
+            var windowHeight = window.innerHeight;
+            if (rect.bottom > 0 && rect.top < windowHeight) {
+                var speed = 0.8;
+                var offset = (window.scrollY - container.offsetTop) * speed;
+                img.style.transform = 'translateY(' + offset + 'px)';
+            }
+        }
+        window.addEventListener('scroll', parallaxScroll, {passive:true});
+        window.addEventListener('resize', parallaxScroll);
+        document.addEventListener('DOMContentLoaded', parallaxScroll);
+    });
+})();
+
+// Content Testing Gallery Auto-Rotation
+document.addEventListener('DOMContentLoaded', function() {
+    const contentTestingImages = [
+        {
+            src: "img/interlogue/Content Testing 02.jpg", 
+            caption: "Drawing by J (6yo)"
+        },
+        {
+            src: "img/interlogue/Content Testing 03.jpg",
+            caption: "Drawing by C (8yo) with grandma"
+        },
+        {
+            src: "img/interlogue/Content Testing 04.jpg",
+            caption: "Participants and their grandparents working on the activities in the Gallery"
+        },
+        {
+            src: "img/interlogue/Content Testing 05.jpg",
+            caption: "E and his grandpa reading the book to complete the activitiy in the Gallery"
+        },
+    ];
+
+    let currentContentTestingIndex = 0;
+    const contentTestingImg = document.getElementById('contentTestingGalleryImage');
+    const contentTestingImgNext = document.getElementById('contentTestingGalleryImageNext');
+    const contentTestingCaption = document.getElementById('contentTestingCaption');
+
+    // Only initialize if elements exist (for interlogue.html page)
+    if (contentTestingImg && contentTestingImgNext && contentTestingCaption) {
+        function updateContentTestingGallery() {
+            const nextIndex = (currentContentTestingIndex + 1) % contentTestingImages.length;
+            
+            // Prepare next image
+            contentTestingImgNext.src = contentTestingImages[nextIndex].src;
+            contentTestingImgNext.style.opacity = '0';
+            
+            // Start transition
+            requestAnimationFrame(() => {
+                contentTestingImgNext.style.opacity = '1';
+                setTimeout(() => {
+                    // Update current image and reset next image
+                    contentTestingImg.src = contentTestingImages[nextIndex].src;
+                    contentTestingImgNext.style.opacity = '0';
+                    contentTestingCaption.textContent = contentTestingImages[nextIndex].caption;
+                    currentContentTestingIndex = nextIndex;
+                }, 500);
+            });
+        }
+
+        // Initial state
+        contentTestingImgNext.src = contentTestingImages[0].src;
+        
+        // Auto rotate every 3 seconds
+        setInterval(updateContentTestingGallery, 3000);
+    }
+});
+
 

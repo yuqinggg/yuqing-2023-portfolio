@@ -40,6 +40,27 @@ Your custom css here
     position: relative;
   }
 
+  .bg-img-3 {
+    /* The image used */
+    background-image: url(../img/interlogue/interlogue-cover.jpg);
+    background-color: #28386B;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    /* Needed to position the navbar */
+    position: relative;
+  }
+  
+  
+/* Gallery Container */
+/* .gallery-container {
+  background-color: rgb(253, 232, 71);
+}  */
+
 /* Remove default body margin */
   body { 
     padding: 0; 
@@ -47,4 +68,51 @@ Your custom css here
 /* Custom margin for containers */
 .body-container{
     margin-top:120px;
+}
+
+/* Hide protected content and login screen */
+#protected-content { display: none; }
+#login-screen { display: none; text-align: center; margin-top: 100px; }
+
+/* Gallery CSS */
+.gallery-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+
+.gallery-arrow {
+    z-index: 2;
+}
+
+/* Optional: style for slider dots if you want to keep them consistent */
+.slider-dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: #bbb;
+    display: inline-block;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+/* Parallax Effect Styles */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+    width: 100%;
+}
+.parallax {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    will-change: transform;
+}
+@media (max-width: 768px) {
+    .parallax-container {
+        height: 230px;
+    }
 }
