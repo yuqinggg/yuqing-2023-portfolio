@@ -18,7 +18,7 @@ Change your color here
 ////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 :root {
-    --primary-color: #694bea;
+    --primary-color: #275b9b;
     --secondary-color: #f8cf46;
 }
 
@@ -74,6 +74,7 @@ a.link {
     position: relative;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out
+    
 }
 
 a.link::before {
