@@ -2,6 +2,11 @@
 
 Your custom css here
 
+/* Hyperlink styling */
+a {
+    text-decoration: underline;
+}
+
 /////////////////////////////////////////*/
 
 /* margin for about page */
