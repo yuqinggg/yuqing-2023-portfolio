@@ -19,6 +19,8 @@
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "slhg7aoay5");
         </script>
+        <!-- SitePass
+        <script type="text/javascript" src="https://firebasestorage.googleapis.com/v0/b/simple-site-pass.firebasestorage.app/o/public%2Fsimple-pass.js?alt=media&siteId=_-zJBnjQuvZZ"></script> -->
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,7 +41,7 @@
                 <div id="loader"></div>
             </div>
             <!-- Navigation -->
-            <div class="bg-img-3" >
+            <div class="bg-img-4" >
                 <nav class="navbar navbar-expand-sm navbar-light bg-transparent py-3" id="mainNav">
                     <div class="container">
                         <a class="navbar-brand js-scroll-trigger" href="index.html">Tay Yu Qing</a>
@@ -82,7 +84,7 @@
                     </div>
                     <div class="col-md-5">
                         <p class="lead">
-                            A project to improve the experience of redeeming PPS Club KrisShop Gift Vouchers on KrisShop.com for <a href="https://www.singaporeair.com/en_UK/sg/ppsclub-krisflyer/ppsclub/the-ppsclub/">PPS members</a>. The goal was to reduce friction in the voucher redemption process and strengthen the KrisFlyer loyalty programme across the SIA group.
+                            A project to improve the experience of redeeming PPS Club KrisShop Gift Vouchers on KrisShop.com for <a href="https://www.singaporeair.com/en_UK/sg/ppsclub-krisflyer/ppsclub/the-ppsclub/" target="_blank">PPS members</a>. The goal was to reduce friction in the voucher redemption process and strengthen the KrisFlyer loyalty programme across the SIA group.
                         </p>
                     </div>
                 </div>
@@ -127,17 +129,105 @@
                 </div>
             </div>
         </div>
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <img src="img/voucher-redemption/Voucher Redemption Flow Desktop.gif" class="img-fluid" alt="Voucher Redemption Flow">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <p class="headline-subtitle">
+                        Background
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <p> Singapore Airlines PPS Members are given multiple KrisShop vouchers annually as part of the airline loyalty programme. However, the redemption of vouchers process had multiple painpoints:</p>
+                        <ol>
+                            <li>Customers had to leave the checkout flow to obtain the voucher code.</li>
+                            <li>The presence of both a 'voucher code' and a 'voucher serial number' in the email can be confusing for customers, as both are visually emphasized, making it unclear which one to use.</li>
+                            <li>Manual input of voucher codes increases the likelihood of human error, making the user journey less efficient and prone to mistakes.</li>
+                        </ol>
+                        <p>This results in high error rates in redemption and high volume of enquiries on voucher redemptions from customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <img src="img/voucher-redemption/voucher-user-flow.png" class="img-fluid" alt="Voucher User Flow">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-2">
+                    <p class="headline-subtitle">
+                    Design Process
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <p>The first step was to integrate Singapore Airlines vouchers API with KrisShop platform. As integration between multiple platforms was required, I collaborated with the developers to create a technical flow diagram. This became the "game plan" for the team.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <img src="img/voucher-redemption/voucher-technical-diagram.png" class="img-fluid" alt="Voucher User Flow">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-8">
+                    <p>Then, I designed flow and screens based on the available information provided via the API and business requirements. One of the challenges was that the Cybersecurity team required an OTP authentication for voucher redemption due to the high cash value.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <img src="img/voucher-redemption/voucher-design-figma.png" class="img-fluid" alt="Voucher User Flow">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-md-2">
+                    <p class="headline-subtitle">
+                    Final Design
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <p>After numerous discussions with various stakeholders and user testing, the following desktop and mobile flow was created. The final design seamlessly integrates voucher display into the checkout process, eliminating the need for customers to leave the platform. By automatically populating voucher codes from the API, we significantly reduced manual input errors and improved the overall user experience. The OTP authentication step was positioned strategically to balance security requirements with user convenience, ensuring a smooth redemption journey for PPS members.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-2">
+                    <img src="img/voucher-redemption/Voucher Redemption Flow Mobile.gif" class="img-fluid" alt="Voucher User Flow">
+                </div>
+                <div class="col-md-5">
+                    <img src="img/voucher-redemption/Voucher Redemption Flow Desktop.gif" class="img-fluid" alt="Voucher User Flow">
+                </div>
+            </div>
+        </div>
+        
+        
 
-</div>
-
-
+        
 
    <!-- footer -->
    <footer class="footer pb-5">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="copy"> &copy; 2024 <a href=index.html> tayyuqing.com </a></div>
+                <div class="copy"> &copy; 2026 <a href=index.html> tayyuqing.com </a></div>
             </div>
         </div>
     </div>
