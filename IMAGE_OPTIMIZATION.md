@@ -11,7 +11,44 @@ All images now include `loading="lazy"` attribute, which defers image loading un
 - Decreases bandwidth usage
 - Improved Core Web Vitals
 
-## 2. **Image Format Optimization**
+## 2. **Render Blocking Resource Optimization** ✓ (Implemented)
+Eliminated render blocking CSS and JavaScript to improve First Contentful Paint (FCP) and Largest Contentful Paint (LCP).
+
+### CSS Optimization
+- **Critical CSS**: Bootstrap and theme styles load synchronously for immediate rendering
+- **Non-critical CSS**: Icon fonts and custom styles use `preload` with `onload` to load asynchronously
+- **Fallback**: `<noscript>` tags ensure CSS loads even with JavaScript disabled
+
+### JavaScript Optimization
+- **Defer attribute**: All non-critical JavaScript files now use `defer` to prevent render blocking
+- **Load order**: Scripts execute after HTML parsing completes
+- **Module scripts**: Lottie animations (where used) remain as ES modules for proper dependency handling
+
+### Implementation Details
+```html
+<!-- Asynchronous CSS loading -->
+<link rel="preload" href="css/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="css/custom.css"></noscript>
+
+<!-- Deferred JavaScript -->
+<script src="js/custom.js" defer></script>
+```
+
+### Files Optimized
+- `index.html` ✓
+- `about.html` ✓
+- `miles-redemption.html` ✓
+- `International-delivery.html` ✓
+- `interlogue.html` ✓
+- `pps-voucher.html` ✓
+- `project-101.html` ✓
+
+### Benefit
+- Faster First Contentful Paint (FCP)
+- Improved Core Web Vitals scores
+- Better user experience with immediate visual feedback
+
+## 3. **Image Format Optimization**
 
 ### Using TinyPNG for Compression
 Run this command before adding images to the site:
@@ -44,7 +81,7 @@ for f in img/miles-redemption/*.jpg; do cwebp "$f" -o "${f%.jpg}.webp"; done
 </picture>
 ```
 
-## 3. **Responsive Images**
+## 4. **Responsive Images**
 
 ### Using srcset for Different Screen Sizes:
 If you create small, medium, and large versions:
@@ -62,7 +99,7 @@ If you create small, medium, and large versions:
 >
 ```
 
-## 4. **Browser Caching** (Server Configuration)
+## 5. **Browser Caching** (Server Configuration)
 
 Add this to your `.htaccess` file (if using Apache):
 ```apache
@@ -80,7 +117,7 @@ Or for Next.js/Node.js servers, add cache headers:
 res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
 ```
 
-## 5. **Content Delivery Network (CDN)**
+## 6. **Content Delivery Network (CDN)**
 
 Consider using:
 - **Cloudflare** (free tier available)
@@ -92,7 +129,7 @@ Benefits:
 - Automatic format optimization
 - On-the-fly image resizing
 
-## 6. **Image Optimization Tools**
+## 7. **Image Optimization Tools**
 
 ### Free Online Tools:
 - [TinyPNG](https://tinypng.com) - Already set up
@@ -105,7 +142,7 @@ Benefits:
 ls -lh img/**/*.{jpg,png,gif}
 ```
 
-## 7. **Performance Metrics to Monitor**
+## 8. **Performance Metrics to Monitor**
 
 After implementation, check:
 - **LCP** (Largest Contentful Paint) - Should be < 2.5s
@@ -114,13 +151,14 @@ After implementation, check:
 
 Use [PageSpeed Insights](https://pagespeed.web.dev/) to measure.
 
-## 8. **Quick Wins (Already Done)**
+## 9. **Quick Wins (Already Done)**
 
 ✓ Lazy loading implemented on all images
+✓ Render blocking resources optimized (CSS preload + JS defer)
 ✓ TinyPNG compression script set up
 ✓ Modern image formats supported (.webp)
 
-## 9. **Next Steps**
+## 10. **Next Steps**
 
 1. Convert JPG/PNG to WebP where possible
 2. Test with PageSpeed Insights
