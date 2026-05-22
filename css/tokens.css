@@ -1,0 +1,142 @@
+/* ============================================================
+   Design Tokens — yuqing-2023-portfolio
+   Source of truth for colors, type, spacing, motion, and
+   breakpoints. Import before style.css and custom.css.
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     Color — Brand
+  ---------------------------------------------------------- */
+  --color-brand-primary:   #275b9b;   /* links, selection highlight */
+  --color-brand-secondary: #f8cf46;   /* accent yellow */
+  --color-brand-navy:      #28386B;   /* project cover fallback bg */
+
+  /* ----------------------------------------------------------
+     Color — Project overlays (hover cards on index)
+  ---------------------------------------------------------- */
+  --overlay-voucher:       rgba(0, 0, 0, 0.77);
+  --overlay-miles:         rgba(58, 4, 97, 0.868);
+  --overlay-intl-delivery: rgba(0, 38, 107, 0.8);
+  --overlay-interlogue:    rgba(247, 141, 2, 0.77);
+
+  /* ----------------------------------------------------------
+     Color — Neutral
+  ---------------------------------------------------------- */
+  --color-black:      #000000;
+  --color-gray-900:   #222222;   /* loader border */
+  --color-gray-700:   #333333;   /* gallery arrows, muted text */
+  --color-gray-500:   #495057;   /* form input text */
+  --color-gray-300:   #bbb;      /* slider dot inactive */
+  --color-gray-200:   #d9d9d9;   /* link underline decoration */
+  --color-gray-100:   #e9ecef;   /* form border */
+  --color-white:      #ffffff;
+
+  /* ----------------------------------------------------------
+     Color — Semantic aliases
+  ---------------------------------------------------------- */
+  --color-text-primary:   var(--color-black);
+  --color-text-muted:     var(--color-gray-700);
+  --color-text-on-dark:   var(--color-white);
+  --color-bg-page:        var(--color-white);
+  --color-bg-overlay:     var(--color-white);   /* preloader */
+  --color-border:         var(--color-gray-100);
+  --color-border-subtle:  rgba(0, 0, 0, 0.2);
+  --color-link:           var(--color-brand-primary);
+
+  /* ----------------------------------------------------------
+     Typography — Family
+  ---------------------------------------------------------- */
+  --font-family-base: 'Muli', sans-serif;
+
+  /* ----------------------------------------------------------
+     Typography — Weight
+  ---------------------------------------------------------- */
+  --font-weight-thin:       200;
+  --font-weight-light:      300;
+  --font-weight-regular:    400;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+  --font-weight-extrabold:  800;
+  --font-weight-black:      900;
+
+  /* ----------------------------------------------------------
+     Typography — Size
+  ---------------------------------------------------------- */
+  --font-size-xs:   14px;    /* work-entry-cat */
+  --font-size-sm:   18px;    /* filter links, project-intro list */
+  --font-size-md:   22px;    /* work-entry-title */
+  --font-size-lg:   24px;    /* headline-subtitle */
+  --font-size-nav:  1.25rem; /* navbar-brand */
+
+  /* ----------------------------------------------------------
+     Typography — Line height & letter spacing
+  ---------------------------------------------------------- */
+  --line-height-heading:    1.64;
+  --letter-spacing-nav:     0.04rem;
+
+  /* ----------------------------------------------------------
+     Spacing — Section padding scale
+  ---------------------------------------------------------- */
+  --space-xsm: 30px;   /* .space-xsm */
+  --space-sm:  60px;   /* .space-sm  */
+  --space-md:  90px;   /* .space-md  */
+
+  /* ----------------------------------------------------------
+     Spacing — Layout
+  ---------------------------------------------------------- */
+  --navbar-height:          120px;  /* body padding-top, body-container margin-top */
+  --footer-margin-top:      115px;
+  --container-max-width:    1440px;
+
+  /* ----------------------------------------------------------
+     Spacing — Component
+  ---------------------------------------------------------- */
+  --entry-content-bottom:   50px;
+  --entry-content-left:     50px;
+  --portfolio-filter-gap:   50px;   /* margin-bottom on #portfolio-filters */
+  --filter-item-gap:        100px;  /* margin-right between filter <li> */
+  --footer-title-gap:       100px;  /* margin-bottom on .footer-title */
+
+  /* ----------------------------------------------------------
+     Border
+  ---------------------------------------------------------- */
+  --border-width-thin:   1px;
+  --border-width-accent: 3px;
+  --border-radius-pill:  50%;
+  --border-radius-sharp: 0;
+
+  /* ----------------------------------------------------------
+     Shadow
+  ---------------------------------------------------------- */
+  /* No custom shadows defined; Bootstrap defaults apply */
+
+  /* ----------------------------------------------------------
+     Motion — Durations
+  ---------------------------------------------------------- */
+  --duration-fast:   0.2s;
+  --duration-medium: 0.3s;
+  --duration-slow:   0.5s;
+
+  /* ----------------------------------------------------------
+     Motion — Easing
+  ---------------------------------------------------------- */
+  --ease-standard:   ease-in-out;
+  --ease-expressive: cubic-bezier(0.4, 0.2, 0, 1);
+
+  /* ----------------------------------------------------------
+     Motion — Transitions (ready-to-use shorthands)
+  ---------------------------------------------------------- */
+  --transition-fast:      all var(--duration-fast)   var(--ease-standard);
+  --transition-medium:    all var(--duration-medium)  var(--ease-standard);
+  --transition-slow-200:  all var(--duration-slow)   var(--ease-expressive) 0.2s;
+  --transition-slow-300:  all var(--duration-slow)   var(--ease-expressive) 0.3s;
+
+  /* ----------------------------------------------------------
+     Breakpoints (reference only — use in media queries)
+     600px  — single-column grid
+     768px  — parallax height switch, mobile gallery arrows
+     800px  — two-column photo grid
+  ---------------------------------------------------------- */
+}
