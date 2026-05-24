@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
     "compress": "node compress-images.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +24,8 @@
   "dependencies": {
     "dotenv": "^17.4.0",
     "tinify": "^1.8.2"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
   }
 }
