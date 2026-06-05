@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="author" content="http://www.tayyuqing.com" />
+        <meta name="Portfolio" content="YuQing's Portfolio"/>
+        <link rel="canonical" href="http://www.tayyuqing.com" />
+        <title>YuQing's Portfolio | KrisShop Australia</title>
+        <!-- Critical CSS: Fonts (keep synchronous) -->
+        <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+        <!-- Non-critical CSS: Load asynchronously -->
+        <link rel="preload" href="vendor/bootstrap/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="css/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="css/style.css" rel="stylesheet">
+            <link href="css/custom.css" rel="stylesheet">
+        </noscript>
+        <style>
+            /* Localisation gallery */
+            .loc-stage-nav {
+                display: flex;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+            .loc-stage-btn {
+                flex: 1;
+                padding: 12px 8px;
+                background: #fff;
+                border: none;
+                border-right: 1px solid #dee2e6;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 3px;
+                font-family: inherit;
+                font-size: 12px;
+                font-weight: 500;
+                color: #6c757d;
+                transition: background 0.2s, color 0.2s;
+            }
+            .loc-stage-btn:last-child { border-right: none; }
+            .loc-stage-btn:hover:not(.active) { background: #f8f9fa; color: #333; }
+            .loc-stage-btn.active { background: #0B1A2E; color: #fff; }
+            .loc-stage-num {
+                font-size: 10px;
+                font-weight: 300;
+                letter-spacing: 0.1em;
+                color: #adb5bd;
+            }
+            .loc-stage-btn.active .loc-stage-num { color: #adb5bd; }
+            .loc-gallery-frame { display: none; }
+            .loc-gallery-frame.active { display: block; }
+            .loc-gallery-frame img {
+                border-radius: 8px;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+                width: 100%;
+            }
+            @media (max-width: 576px) {
+                .loc-stage-label { display: none; }
+                .loc-stage-btn { font-size: 10px; padding: 10px 4px; }
+            }
+
+            /* Localisation — Confirmation screen (coded) */
+            .loc-conf-wrap { width: 100%; }
+            .loc-checkout-steps {
+                display: flex;
+                border: 1px solid #dee2e6;
+                margin-bottom: 24px;
+                background: #f8f9fa;
+            }
+            .loc-step {
+                flex: 1;
+                padding: 12px 8px;
+                text-align: center;
+                font-size: 11px;
+                font-weight: 500;
+                color: #9ca3af;
+                letter-spacing: 0.06em;
+                border-right: 1px solid #dee2e6;
+            }
+            .loc-step:last-child { border-right: none; }
+            .loc-conf-grid {
+                display: flex;
+                gap: 36px;
+                align-items: flex-start;
+            }
+            .loc-conf-card-col { flex: 0 0 40%; }
+            .loc-conf-annot-col { flex: 1; }
+            .loc-conf-card {
+                border: 1px solid #e5e7eb;
+                border-radius: 12px;
+                padding: 24px 20px;
+                background: #fff;
+            }
+            .loc-conf-check-wrap {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 14px;
+            }
+            .loc-conf-check-circle {
+                width: 52px;
+                height: 52px;
+                border-radius: 50%;
+                background: #86efac;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .loc-conf-check-circle svg {
+                width: 24px;
+                height: 24px;
+                stroke: #fff;
+                fill: none;
+                stroke-width: 2.5;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+            .loc-conf-title {
+                text-align: center;
+                font-size: 20px;
+                font-weight: 600;
+                color: #111827;
+                margin: 0 0 4px;
+                line-height: 1.3;
+            }
+            .loc-conf-ordernum {
+                text-align: center;
+                font-size: 13px;
+                color: #9ca3af;
+                margin: 0 0 18px;
+            }
+            .loc-conf-summary {
+                border: 1px solid #e5e7eb;
+                border-radius: 6px;
+                padding: 14px 16px;
+                margin-bottom: 14px;
+                font-size: 13px;
+            }
+            .loc-conf-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 4px 0;
+                color: #374151;
+            }
+            .loc-conf-row.font-bold { font-weight: 600; color: #111827; }
+            .loc-conf-label-muted { color: #9ca3af; }
+            .loc-conf-val-group {
+                text-align: right;
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+            }
+            .loc-conf-val-sub {
+                font-size: 11px;
+                color: #9ca3af;
+                font-weight: 400;
+            }
+            .loc-conf-divider { border-top: 1px solid #e5e7eb; margin: 8px 0; }
+            .loc-miles-earned-box {
+                border: 1px solid #93c5fd;
+                background: #eff6ff;
+                border-radius: 6px;
+                padding: 10px 14px;
+                text-align: center;
+                font-size: 13px;
+                font-weight: 500;
+                color: #2563eb;
+                margin-bottom: 14px;
+            }
+            .loc-conf-cta {
+                display: block;
+                width: 100%;
+                background: #111;
+                color: #fff;
+                border: none;
+                padding: 14px;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                cursor: default;
+                border-radius: 0;
+                font-family: inherit;
+            }
+            .loc-annot-screen-title {
+                font-size: 15px;
+                font-weight: 600;
+                color: #111827;
+                margin: 0 0 14px;
+            }
+            .loc-annot-callout {
+                background: #eff6ff;
+                border-left: 3px solid #3b82f6;
+                padding: 12px 14px;
+                margin-bottom: 18px;
+            }
+            .loc-annot-callout-label {
+                font-size: 11px;
+                font-weight: 700;
+                color: #3b82f6;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                margin: 0 0 6px;
+            }
+            .loc-annot-callout-body {
+                font-size: 13px;
+                color: #374151;
+                margin: 0;
+                line-height: 1.6;
+            }
+            .loc-why-label {
+                font-size: 11px;
+                font-weight: 600;
+                color: #9ca3af;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                margin: 0 0 6px;
+            }
+            .loc-why-body {
+                font-size: 13px;
+                color: #374151;
+                line-height: 1.6;
+                margin: 0;
+            }
+            @media (max-width: 576px) {
+                .loc-conf-grid { flex-direction: column; }
+                .loc-conf-card-col { flex: 0 0 100%; width: 100%; }
+                .loc-step { font-size: 9px; padding: 8px 4px; letter-spacing: 0; }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+        <!-- Navigation -->
+        <div class="bg-img-5">
+            <nav class="navbar navbar-expand-sm navbar-light bg-transparent py-3" id="mainNav">
+                <div class="container">
+                    <a class="navbar-brand js-scroll-trigger" href="index.html">Tay Yu Qing</a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarResponsive"
+                        aria-controls="navbarResponsive"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                        >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="index.html">Work</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="about.html">About</a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Header -->
+        <header class="space-sm">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-5">
+                        <div class="headline mt-0 mb-0">
+                            <div class="headline-content">
+                                <h1 class="headline-title">KrisShop Australia</h1>
+                                <p class="headline-subtitle">Expanding KrisShop to the Australian Market</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="lead">Launching KrisShop in Australia- Singapore Airlines' second largest KrisFlyer base. Designing a localised experience for Australian shoppers to turn untapped miles into non-air redemptions and introduces new marketplace capabilities for sellers.</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-2">
+                    <ul class="list-unstyled">
+                        <li><b>My Role</b></li>
+                        <li>UX Strategist,<br>UX Designer</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="list-unstyled">
+                        <li><b>Duration</b></li>
+                        <li>2024–2025</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="list-unstyled">
+                        <li><b>Project Type</b></li>
+                        <li>New Market Launch</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="list-unstyled">
+                        <li><b>Skills</b></li>
+                        <li>Benchmarking</li>
+                        <li>UX Strategy</li>
+                        <li>UI/UX Design</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="list-unstyled">
+                        <li><b>Outcome</b></li>
+                        <li>TBC</li>
+                        <li>(Launch 7 May 2026)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-10">
+                    <img src="img/krisshop-australia/krisshop-australia-cover.jpg" class="img-fluid mx-auto d-block" alt="KrisShop Australia" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <section class="space-sm">
+
+            <!-- Insight-to-decision trail -->
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <p class="headline-subtitle">Insight-to-Decision Trail</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>Australia is Singapore Airlines' second largest KrisFlyer membership base after Singapore, with over 1 million untapped KrisFlyer miles redeemed annually — yet Australian members had no dedicated KrisShop storefront to spend them on. Flight redemptions face limited inventory, creating a strategic opportunity to shift customer demand toward non-air redemptions through a localised KrisShop experience.</p>
+                        <p><b>The design challenge was to translate this business opportunity into a coherent, insight-led product — one that surfaces miles as a meaningful currency for Australian shoppers across every touchpoint of the shopping journey.</b></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-insight.jpg" class="img-fluid mx-auto d-block" alt="Insight to Decision" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stakeholder alignment
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <p class="headline-subtitle">Stakeholder Alignment</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>Before design work began, a stakeholder alignment artefact was produced to establish a shared understanding of project scope, priorities, and constraints across business, engineering, logistics, and the KrisFlyer programme team. This artefact mapped the key business objectives against user needs and defined the three pillars of work: miles redemption, localisation, and seller ecosystem capabilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-alignment.jpg" class="img-fluid mx-auto d-block" alt="Stakeholder Alignment" loading="lazy">
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Miles Redemption -->
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <p class="headline-subtitle">Miles Redemption</p>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>Key Business Objective for the New Market</h3>
+                        <p>With over 1 million untapped KrisFlyer miles sitting in Australian accounts annually, miles redemption is the central value proposition of the Australian launch. Flight redemptions have limited inventory and high competition; KrisShop gives members a tangible, immediate way to spend their miles. The design ensures miles are not buried — they are surfaced as a primary currency throughout the entire user journey.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <figure>
+  <img src="img/krisshop-australia/krisshop-australia-miles-overview.jpg" class="img-fluid mx-auto d-block" alt="Miles Redemption Overview" loading="lazy">
+  
+</figure>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-8 offset-md-2">
+                        <h3>1. Miles Redemption Across the User Flow</h3>
+                    </div>
+                    <div class="col-md-8 offset-md-2 mt-3">
+                        <p><b>Homepage</b> — Miles balance is prominently featured on the homepage, immediately signposting to KrisFlyer members that their miles are spendable here. This anchors the value proposition from the moment a member lands on the site.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-4 mb-4">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-miles-homepage.jpg" class="img-fluid mx-auto d-block" alt="Miles on Homepage" loading="lazy">
+                        <figcaption class="text-muted text-center small mt-2">Mockup used to illustrate how the new homepage contains features to encourage more miles redemption.</figcaption>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="col-md-8 offset-md-2">
+                        <p><b>Campaign Page</b> — A dynamic miles redemption landing page drives discovery, showcasing participating products and communicating the savings available when redeeming miles. This page adapts based on available promotions to keep the offer feeling current.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-4 mb-4">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-miles-campaign.jpg" class="img-fluid mx-auto d-block" alt="Campaign Page" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="col-md-8 offset-md-2">
+                        <p><b>Product Listing Page (PLP)</b> — Miles are presented as the primary currency for miles burners, with miles pricing displayed alongside AUD pricing on every product card. This makes it easy for members to compare and identify the best value for their miles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-4 mb-4">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-miles-plp.jpg" class="img-fluid mx-auto d-block" alt="PLP Miles" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="col-md-8 offset-md-2">
+                        <p><b>Checkout</b> — At checkout, members can apply their KrisFlyer miles for cost savings, with clear feedback on how many miles will be used and the resulting AUD saving. The flow is designed to reduce friction and encourage miles redemption at the point of purchase.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-4 mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-miles-checkout.jpg" class="img-fluid mx-auto d-block" alt="Checkout Miles" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Localisation Gallery -->
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <p class="headline-subtitle">Localisation</p>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>2. Adapting for Australian Shoppers</h3>
+                        <p>Localising KrisShop for Australia went beyond currency conversion. Each checkout touchpoint was reviewed and adapted — from how prices display, to how miles and vouchers apply, to what members see after purchase.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-4 mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <div class="gallery" title="Localisation Gallery">
+                        <!-- Stage nav -->
+                        <div class="loc-stage-nav">
+                            <button class="loc-stage-btn active" onclick="locGoTo(0)">
+                                <span class="loc-stage-num">01</span>
+                                <span class="loc-stage-label">Currency</span>
+                            </button>
+                            <button class="loc-stage-btn" onclick="locGoTo(1)">
+                                <span class="loc-stage-num">02</span>
+                                <span class="loc-stage-label">Miles Redemption</span>
+                            </button>
+                            <button class="loc-stage-btn" onclick="locGoTo(2)">
+                                <span class="loc-stage-num">03</span>
+                                <span class="loc-stage-label">Voucher Redemption</span>
+                            </button>
+                            <button class="loc-stage-btn" onclick="locGoTo(3)">
+                                <span class="loc-stage-num">04</span>
+                                <span class="loc-stage-label">Order Confirmation</span>
+                            </button>
+                        </div>
+                        <!-- Gallery frames -->
+                        <div class="loc-gallery-frame active" id="loc-0">
+                            <img src="img/krisshop-australia/localisation-currency.png" alt="Screen 1 — Cart with AUD pricing and miles balance" loading="lazy">
+                        </div>
+                        <div class="loc-gallery-frame" id="loc-1">
+                            <img src="img/krisshop-australia/localisation-miles.png" alt="Screen 2 — Miles redemption with AU cap rule" loading="lazy">
+                        </div>
+                        <div class="loc-gallery-frame" id="loc-2">
+                            <img src="img/krisshop-australia/localisation-voucher.png" alt="Screen 3 — Voucher sequencing for AU" loading="lazy">
+                        </div>
+                        <div class="loc-gallery-frame" id="loc-3">
+                            <div class="loc-conf-wrap">
+                                <div class="loc-conf-grid">
+                                    <div class="loc-conf-card-col">
+                                        <div class="loc-conf-card">
+                                            <div class="loc-conf-check-wrap">
+                                                <div class="loc-conf-check-circle">
+                                                    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                </div>
+                                            </div>
+                                            <p class="loc-conf-title">Order Confirmation</p>
+                                            <p class="loc-conf-ordernum">#KSO-AU 123456</p>
+                                            <div class="loc-conf-summary">
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Items Total</span>
+                                                    <span>AUD 100.00</span>
+                                                </div>
+                                                <div class="loc-conf-divider"></div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">PPS Voucher</span>
+                                                    <div class="loc-conf-val-group">
+                                                        <span>– AUD 20.11</span>
+                                                        <span class="loc-conf-val-sub">(SGD 20.00)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">Miles Redeemed</span>
+                                                    <div class="loc-conf-val-group">
+                                                        <span>– 3000 miles</span>
+                                                        <span class="loc-conf-val-sub">(AUD 30.00)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">Shipping Cost</span>
+                                                    <span>FREE</span>
+                                                </div>
+                                                <div class="loc-conf-divider"></div>
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Total</span>
+                                                    <div class="loc-conf-val-group">
+                                                        <span>AUD 49.89</span>
+                                                        <span class="loc-conf-val-sub">or 4,989 miles</span>
+                                                        <span class="loc-conf-val-sub">Includes GST of AUD 4.98</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="loc-miles-earned-box">+ 4,989 miles KrisFlyer Miles earned</div>
+                                            <button class="loc-conf-cta">CONTINUE SHOPPING</button>
+                                        </div>
+                                    </div>
+                                    <div class="loc-conf-annot-col">
+                                        <p class="loc-annot-screen-title">Screen 3 — Voucher application</p>
+                                        <div class="loc-annot-callout">
+                                            <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
+                                            <p class="loc-annot-callout-body">Full payment breakdown shown in AUD, with a clear miles-earned summary — an AU KrisFlyer expectation from the loyalty programme.</p>
+                                        </div>
+                                        <p class="loc-why-label">WHY IT MATTERS</p>
+                                        <p class="loc-why-body">AU users expected to see the complete picture post-purchase. Omitting the miles-earned line in early prototypes caused uncertainty about whether the loyalty programme had worked.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div><!-- /.gallery -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seller Ecosystem -->
+            <div class="container">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <p class="headline-subtitle">Seller Ecosystem</p>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>3. New Marketplace Capabilities</h3>
+                        <p>The Australian launch also introduced new seller ecosystem features to support a marketplace model, giving customers more transparency and control over their purchases.</p>
+                        <ul>
+                            <li><b>Group Seller</b> — Products from the same seller are grouped to streamline the browsing and checkout experience, reducing fragmentation when buying from multiple listings.</li>
+                            <li><b>Contact Seller</b> — Customers can reach sellers directly from the product page, supporting pre-purchase queries and building trust with marketplace listings.</li>
+                            <li><b>Track Order</b> — End-to-end order tracking is surfaced within the KrisShop platform, removing the need to navigate to external courier sites.</li>
+                            <li><b>Return Request</b> — A self-service return request flow is designed to meet Australian Consumer Law requirements, giving customers a clear and easy path for returns.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 mb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <img src="img/krisshop-australia/krisshop-australia-seller.jpg" class="img-fluid mx-auto d-block" alt="Seller Ecosystem" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- footer -->
+        <footer class="footer pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="copy"> &copy; 2026 <a href=index.html> tayyuqing.com </a></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /main content -->
+        <!-- Critical JavaScript: jQuery (keep synchronous - other scripts depend on it) -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <!-- Non-critical JavaScript: Defer loading -->
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+        <script src="vendor/jquery-easing/jquery.easing.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" defer></script>
+        <script src="js/custom.js" defer></script>
+        <script>
+            function locGoTo(idx) {
+                document.querySelectorAll('.loc-stage-btn').forEach(function(b, i) {
+                    b.classList.toggle('active', i === idx);
+                });
+                document.querySelectorAll('.loc-gallery-frame').forEach(function(f, i) {
+                    f.classList.toggle('active', i === idx);
+                });
+            }
+        </script>
+    </body>
+
+</html>

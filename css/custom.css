@@ -70,12 +70,27 @@ a {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  
+
     /* Needed to position the navbar */
     position: relative;
   }
-  
-  
+
+  .bg-img-5 {
+    /* The image used */
+    background-image: url(../img/krisshop-australia/krisshop-australia-cover.jpg);
+    background-color: #1A4D3A;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+
 /* Gallery Container */
 /* .gallery-container {
   background-color: rgb(253, 232, 71);
