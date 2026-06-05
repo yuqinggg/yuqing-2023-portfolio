@@ -235,6 +235,47 @@
                 .loc-conf-card-col { flex: 0 0 100%; width: 100%; }
                 .loc-step { font-size: 9px; padding: 8px 4px; letter-spacing: 0; }
             }
+
+            /* Localisation — Miles Redemption screen (coded) */
+            .loc-miles-cap-note {
+                background: #fefce8;
+                border: 1px solid #fde68a;
+                border-radius: 4px;
+                padding: 10px 14px;
+                font-size: 13px;
+                color: #92400e;
+                margin-top: 10px;
+                line-height: 1.5;
+            }
+
+            /* Localisation — Voucher screen (coded) */
+            .loc-step.loc-step-active { color: #374151; font-weight: 700; }
+            .loc-pay-back {
+                font-size: 13px;
+                color: #6c757d;
+                margin-bottom: 16px;
+                cursor: default;
+            }
+            .loc-voucher-title {
+                font-size: 28px;
+                font-weight: 700;
+                color: #111827;
+                margin: 0 0 18px;
+                line-height: 1.2;
+            }
+            .loc-voucher-input {
+                display: block;
+                width: 100%;
+                border: 1.5px solid #22c55e;
+                border-radius: 4px;
+                padding: 12px 14px;
+                font-size: 13px;
+                color: #374151;
+                background: #fff;
+                font-family: inherit;
+                margin-bottom: 14px;
+                box-sizing: border-box;
+            }
         </style>
     </head>
 
@@ -511,13 +552,139 @@
                         </div>
                         <!-- Gallery frames -->
                         <div class="loc-gallery-frame active" id="loc-0">
-                            <img src="img/krisshop-australia/localisation-currency.png" alt="Screen 1 — Cart with AUD pricing and miles balance" loading="lazy">
+                            <div class="loc-conf-wrap">
+                                <div class="loc-conf-grid">
+                                    <div class="loc-conf-card-col">
+                                        <div class="loc-conf-card">
+                                            <div class="loc-pay-back">&#8249; Back</div>
+                                            <p class="loc-voucher-title">Cart Summary</p>
+                                            <div class="loc-conf-summary">
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Items Total</span>
+                                                    <span>AUD 100.00</span>
+                                                </div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">[PPS] -10% off</span>
+                                                    <span>&#8722;AUD 10.00</span>
+                                                </div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">Shipping Cost</span>
+                                                    <span>FREE</span>
+                                                </div>
+                                                <div class="loc-conf-divider"></div>
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Total</span>
+                                                    <div class="loc-conf-val-group">
+                                                        <span>AUD 90.00</span>
+                                                        <span class="loc-conf-val-sub">or 9,000 miles</span>
+                                                        <span class="loc-conf-val-sub">Includes GST of AUD 9.00</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="loc-conf-cta">PROCEED TO CHECKOUT</button>
+                                        </div>
+                                    </div>
+                                    <div class="loc-conf-annot-col">
+                                        <p class="loc-annot-screen-title">Screen 1 — Cart in AUD</p>
+                                        <div class="loc-annot-callout">
+                                            <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
+                                            <p class="loc-annot-callout-body">All prices display in AUD (A$), not SGD. Miles balance is shown prominently to prompt redemption — a behaviour AU frequent flyers expect.</p>
+                                        </div>
+                                        <p class="loc-why-label">WHY IT MATTERS</p>
+                                        <p class="loc-why-body"> The logical solution was to surface AUD pricing upfront, enabling faster comprehension and reducing drop-off before checkout.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="loc-gallery-frame" id="loc-1">
-                            <img src="img/krisshop-australia/localisation-miles.png" alt="Screen 2 — Miles redemption with AU cap rule" loading="lazy">
+                            <div class="loc-conf-wrap">
+                                <div class="loc-conf-grid">
+                                    <div class="loc-conf-card-col">
+                                        <div class="loc-conf-card">
+                                            <div class="loc-pay-back">&#8249; Payment</div>
+                                            <p class="loc-voucher-title">Redeem KrisFlyer Miles</p>
+                                            <div class="loc-conf-summary">
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Order Total</span>
+                                                    <span>AUD 90.00</span>
+                                                </div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">Miles balance</span>
+                                                    <span>9,000</span>
+                                                </div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">Rate</span>
+                                                    <span>1000 miles = AUD 1.00</span>
+                                                </div>
+                                                <div class="loc-conf-divider"></div>
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Max Redeemable</span>
+                                                    <span>9,000</span>
+                                                </div>
+                                                <div class="loc-miles-cap-note">
+                                                    For partial miles redemption, miles can cover up to 10% of order value
+                                                </div>
+                                            </div>
+                                            <button class="loc-conf-cta">PROCEED TO CHECKOUT</button>
+                                        </div>
+                                    </div>
+                                    <div class="loc-conf-annot-col">
+                                        <p class="loc-annot-screen-title">Screen 2 — Miles Redemption</p>
+                                        <div class="loc-annot-callout">
+                                            <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
+                                            <p class="loc-annot-callout-body">AU has a distinct redemption cap rule (10% of order value) absent from the SG flow. The constraint is surfaced inline — not hidden in T&Cs.</p>
+                                        </div>
+                                        <p class="loc-why-label">WHY IT MATTERS</p>
+                                        <p class="loc-why-body">Testing showed users felt deceived when the cap appeared only at the final step. Moving it here reduced drop-off and support tickets.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="loc-gallery-frame" id="loc-2">
-                            <img src="img/krisshop-australia/localisation-voucher.png" alt="Screen 3 — Voucher sequencing for AU" loading="lazy">
+                            <div class="loc-conf-wrap">
+                                <div class="loc-conf-grid">
+                                    <div class="loc-conf-card-col">
+                                        <div class="loc-conf-card">
+                                            <div class="loc-pay-back">&#8249; Payment</div>
+                                            <p class="loc-voucher-title">Voucher</p>
+                                            <div class="loc-conf-summary">
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Items Total</span>
+                                                    <span>AUD 90.00</span>
+                                                </div>
+                                                <div class="loc-conf-divider"></div>
+                                                <div class="loc-conf-row">
+                                                    <span class="loc-conf-label-muted">PPS Voucher</span>
+                                                    <div class="loc-conf-val-group">
+                                                        <span>&#8722; AUD 20.11</span>
+                                                        <span class="loc-conf-val-sub">(&#8722; SGD 20.00)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="loc-conf-divider"></div>
+                                                <div class="loc-conf-row font-bold">
+                                                    <span>Total</span>
+                                                    <div class="loc-conf-val-group">
+                                                        <span>AUD 69.89</span>
+                                                        <span class="loc-conf-val-sub">or 6,989 miles</span>
+                                                        <span class="loc-conf-val-sub">Includes GST of AUD 6.99</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="loc-voucher-input" value="Voucher Applied" readonly>
+                                            <button class="loc-conf-cta">PROCEED TO PAY</button>
+                                        </div>
+                                    </div>
+                                    <div class="loc-conf-annot-col">
+                                        <p class="loc-annot-screen-title">Screen 3 — Voucher Redemption</p>
+                                        <div class="loc-annot-callout">
+                                            <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
+                                            <p class="loc-annot-callout-body">Annual loyalty vouchers are applied after miles in the AU flow — a sequencing rule required by AU commerce logic, different from SG's simultaneous application.</p>
+                                        </div>
+                                        <p class="loc-why-label">WHY IT MATTERS</p>
+                                        <p class="loc-why-body">The sequencing order affected the final payable amount. Making this visible (not silent) gave users trust that both discounts were applied correctly.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="loc-gallery-frame" id="loc-3">
                             <div class="loc-conf-wrap">
@@ -570,7 +737,7 @@
                                         </div>
                                     </div>
                                     <div class="loc-conf-annot-col">
-                                        <p class="loc-annot-screen-title">Screen 3 — Voucher application</p>
+                                        <p class="loc-annot-screen-title">Screen 4 — Order Confirmation</p>
                                         <div class="loc-annot-callout">
                                             <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
                                             <p class="loc-annot-callout-body">Full payment breakdown shown in AUD, with a clear miles-earned summary — an AU KrisFlyer expectation from the loyalty programme.</p>
