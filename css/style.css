@@ -191,7 +191,6 @@ Navigation
 ///////////////////////*/
 
 .navbar-light .navbar-nav .nav-link {
-    color: rgb(255, 255, 255);
     font-weight: 700;
     letter-spacing: .04rem;
 }
@@ -206,11 +205,6 @@ Navigation
     white-space: nowrap;
     font-weight: 900;
     text-transform: capitalize;
-    color: rgb(255, 255, 255) !important;
-}
-
-.navbar-light .navbar-brand {
-    color: rgb(255, 255, 255) !important;
 }
 
 
