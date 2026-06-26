@@ -16,7 +16,12 @@
         <link href="css/style.css" rel="stylesheet">
         <!-- Your Custom styles for this template -->
         <link rel="preload" href="css/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="css/custom.css"></noscript> </head>
+        <noscript><link rel="stylesheet" href="css/custom.css"></noscript>
+        <!-- Critical CSS: Preloader (inline to prevent FOUC) -->
+        <style>
+            #preloader { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 999; background: #fff; }
+        </style>
+    </head>
 
     <body>
         <div id="preloader">
