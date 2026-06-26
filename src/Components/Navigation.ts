@@ -32,7 +32,7 @@ export class Navigation extends BaseComponent {
       .join('');
 
     return `
-    <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top py-3" id="mainNav">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top py-3 navbar-theme-light" id="mainNav" data-navbar-theme="light">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="${this.escapeHtml(brandHref)}">${this.escapeHtml(brand)}</a>
         <button
@@ -45,6 +45,10 @@ export class Navigation extends BaseComponent {
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
+        </button>
+        <button class="navbar-theme-toggle ml-2" type="button" data-navbar-theme-toggle aria-pressed="false" aria-label="Switch navbar to dark mode">
+          <span class="navbar-theme-toggle-icon" data-navbar-theme-icon aria-hidden="true">☾</span>
+          <span data-navbar-theme-label>Dark mode</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
