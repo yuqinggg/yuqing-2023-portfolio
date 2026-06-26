@@ -7,9 +7,82 @@ var win = $(window);
 var ww = win.width();
 var wh = win.height();
 
+var NAVBAR_THEME_STORAGE_KEY = 'portfolio-navbar-theme';
+
+function getStoredNavbarTheme() {
+    try {
+        return window.localStorage.getItem(NAVBAR_THEME_STORAGE_KEY);
+    } catch (error) {
+        console.warn('Unable to read the saved navbar theme.', error);
+        return null;
+    }
+}
+
+function setStoredNavbarTheme(theme) {
+    try {
+        window.localStorage.setItem(NAVBAR_THEME_STORAGE_KEY, theme);
+    } catch (error) {
+        console.warn('Unable to save the navbar theme.', error);
+    }
+}
+
+function applyNavbarTheme(navbar, theme) {
+    var isDark = theme === 'dark';
+    var toggle = navbar.querySelector('[data-navbar-theme-toggle]');
+    var label = navbar.querySelector('[data-navbar-theme-label]');
+    var icon = navbar.querySelector('[data-navbar-theme-icon]');
+
+    navbar.classList.toggle('navbar-theme-dark', isDark);
+    navbar.classList.toggle('navbar-theme-light', !isDark);
+    navbar.classList.toggle('navbar-dark', isDark);
+    navbar.classList.toggle('navbar-light', !isDark);
+    navbar.setAttribute('data-navbar-theme', theme);
+
+    if (toggle) {
+        toggle.setAttribute('aria-pressed', String(isDark));
+        toggle.setAttribute('aria-label', isDark ? 'Switch navbar to light mode' : 'Switch navbar to dark mode');
+        toggle.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+    }
+
+    if (label) {
+        label.textContent = isDark ? 'Light mode' : 'Dark mode';
+    }
+
+    if (icon) {
+        icon.textContent = isDark ? '☀' : '☾';
+    }
+}
+
+function initNavbarThemeToggle() {
+    var navbar = document.getElementById('mainNav');
+
+    if (!navbar) {
+        return;
+    }
+
+    var toggle = navbar.querySelector('[data-navbar-theme-toggle]');
+
+    if (!toggle) {
+        return;
+    }
+
+    var savedTheme = getStoredNavbarTheme();
+    var defaultTheme = navbar.getAttribute('data-navbar-theme') === 'dark' ? 'dark' : 'light';
+    var activeTheme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : defaultTheme;
+
+    applyNavbarTheme(navbar, activeTheme);
+
+    toggle.addEventListener('click', function() {
+        activeTheme = navbar.getAttribute('data-navbar-theme') === 'dark' ? 'light' : 'dark';
+        applyNavbarTheme(navbar, activeTheme);
+        setStoredNavbarTheme(activeTheme);
+    });
+}
+
 $(document).ready(function() {
 
     // load functions
+    initNavbarThemeToggle();
     imageBG();
     grid();
 
@@ -375,5 +448,3 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(updateContentTestingGallery, 3000);
     }
 });
-
-
