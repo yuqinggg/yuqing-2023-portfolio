@@ -8,9 +8,14 @@
         <meta name="Portfolio" content="YuQing's Portfolio"/>
         <link rel="canonical" href="http://www.tayyuqing.com" />
         <title>YuQing's Portfolio</title>
-        <!-- Critical CSS: Fonts (keep synchronous) -->
-        <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+        <!-- Google Fonts: Muli (async) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap"></noscript>
         <!-- Non-critical CSS: Load asynchronously -->
+        <link rel="preload" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css"></noscript>
         <link rel="preload" href="vendor/bootstrap/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="css/custom.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -382,8 +387,8 @@
             </div>
         </footer>
         <!-- /main content -->
-        <!-- Critical JavaScript: jQuery (keep synchronous - other scripts depend on it) -->
-        <script src="vendor/jquery/jquery.min.js"></script>
+        <!-- JavaScript -->
+        <script src="vendor/jquery/jquery.min.js" defer></script>
         <!-- Non-critical JavaScript: Defer loading -->
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
         <script src="vendor/jquery-easing/jquery.easing.min.js" defer></script>

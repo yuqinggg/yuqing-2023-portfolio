@@ -8,12 +8,16 @@
         <meta name="Portfolio" content="YuQing's Portfolio"/>
         <link rel="canonical" href="http://www.tayyuqing.com" />
         <title>YuQing's Portfolio | KrisShop Australia</title>
-        <!-- Critical CSS: Fonts (keep synchronous) -->
-        <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
-        <!-- Google Fonts for Miles Redemption scroll story -->
+        <!-- Google Fonts (async) -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap">
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap"></noscript>
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"></noscript>
+        <!-- Non-critical CSS: Icons + Styles -->
+        <link rel="preload" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css"></noscript>
         <!-- Non-critical CSS: Load asynchronously -->
         <link rel="preload" href="vendor/bootstrap/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -55,7 +59,7 @@
                 font-size: 14px;
                 line-height: 1.65;
                 color: #6B6B6B;
-                margin: 0;
+                margin: 0 0 24px;
             }
             #loc-stage .loc-right {
                 flex: 1;
@@ -105,17 +109,56 @@
                 width: 100%;
             }
             @media (max-width: 768px) {
-                #loc-stage { flex-direction: column; }
-                #loc-stage .loc-left {
+                #loc-stage, #sel-stage { flex-direction: column; }
+                #loc-stage .loc-left, #sel-stage .loc-left {
                     position: static;
                     width: 100%;
                     padding: 32px 24px;
                     border-right: none;
                     border-bottom: 1px solid rgba(0,0,0,0.07);
                 }
-                #loc-stage .loc-right { padding: 24px; }
+                #loc-stage .loc-right, #sel-stage .loc-right { padding: 24px; }
                 .loc-stage-label { display: none; }
                 .loc-stage-btn { font-size: 10px; padding: 10px 4px; }
+            }
+
+            /* Seller Ecosystem — shares left/right layout with Localisation */
+            #sel-stage {
+                display: flex;
+                align-items: flex-start;
+                background: #F1F2F4;
+                font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            }
+            #sel-stage .loc-left {
+                position: sticky;
+                top: 0;
+                flex: none;
+                width: 340px;
+                min-height: 100vh;
+                padding: 56px 44px;
+                display: flex;
+                flex-direction: column;
+                background: #fff;
+                border-right: 1px solid rgba(0,0,0,0.07);
+            }
+            #sel-stage .loc-left h3 {
+                font-size: 26px;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 8px 0 16px;
+                color: #0B0B0B;
+            }
+            #sel-stage .loc-left .loc-intro {
+                font-size: 14px;
+                line-height: 1.65;
+                color: #6B6B6B;
+                margin: 0 0 24px;
+            }
+            #sel-stage .loc-right {
+                flex: 1;
+                padding: 48px 56px;
+                display: flex;
+                flex-direction: column;
             }
 
             /* Localisation — Confirmation screen (coded) */
@@ -554,6 +597,8 @@
 
             <!-- Localisation Gallery -->
             <div class="container-fluid px-0 mt-4 mb-5" id="loc-stage">
+                <div id="mr-stage">
+                    
                 <!-- LEFT nav -->
                 <aside class="loc-left">
                     <div>
@@ -561,6 +606,7 @@
                         <h3>Adapting for Australian Shoppers</h3>
                         <p class="loc-intro">Localising KrisShop for Australia went beyond currency conversion. Each checkout touchpoint was reviewed and adapted — from how prices display, to how miles and vouchers apply, to what members see after purchase.</p>
                     </div>
+                    <div class="hint">Click on steps to see the screens →</div>
                 </aside>
 
                 <!-- RIGHT content -->
@@ -778,32 +824,40 @@
                             </div>
                         </div>
                 </div><!-- /.loc-right -->
+                
+                </div>
             </div><!-- /#loc-stage -->
+            
 
             <!-- Seller Ecosystem -->
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-5">
-                    <div class="col-md-2">
-                        <p class="headline-subtitle">Seller Ecosystem</p>
+            <div class="container-fluid px-0 mt-4 mb-5" id="sel-stage">
+                <aside class="loc-left">
+                    <div>
+                        <p class="loc-label">III. SELLER ECOSYSTEM</p>
+                        <h3>New Marketplace Capabilities</h3>
+                        <p class="loc-intro">The Australian launch also introduced new seller ecosystem features to support a marketplace model, giving customers more transparency and control over their purchases.</p>
                     </div>
-                    <div class="col-md-8">
-                        <h3>3. New Marketplace Capabilities</h3>
-                        <p>The Australian launch also introduced new seller ecosystem features to support a marketplace model, giving customers more transparency and control over their purchases.</p>
-                        <ul>
-                            <li><b>Group Seller</b> — Products from the same seller are grouped to streamline the browsing and checkout experience, reducing fragmentation when buying from multiple listings.</li>
-                            <li><b>Contact Seller</b> — Customers can reach sellers directly from the product page, supporting pre-purchase queries and building trust with marketplace listings.</li>
-                            <li><b>Track Order</b> — End-to-end order tracking is surfaced within the KrisShop platform, removing the need to navigate to external courier sites.</li>
-                            <li><b>Return Request</b> — A self-service return request flow is designed to meet Australian Consumer Law requirements, giving customers a clear and easy path for returns.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container mt-5 mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <img src="img/krisshop-australia/krisshop-australia-seller.jpg" class="img-fluid mx-auto d-block" alt="Seller Ecosystem" loading="lazy">
-                    </div>
+                </aside>
+                <div class="loc-right">
+                    <ul class="list-unstyled mb-5">
+                        <li class="mb-4">
+                            <b>Group Seller</b>
+                            <p>Products from the same seller are grouped to streamline the browsing and checkout experience, reducing fragmentation when buying from multiple listings.</p>
+                        </li>
+                        <li class="mb-4">
+                            <b>Contact Seller</b>
+                            <p>Customers can reach sellers directly from the product page, supporting pre-purchase queries and building trust with marketplace listings.</p>
+                        </li>
+                        <li class="mb-4">
+                            <b>Track Order</b>
+                            <p>End-to-end order tracking is surfaced within the KrisShop platform, removing the need to navigate to external courier sites.</p>
+                        </li>
+                        <li class="mb-4">
+                            <b>Return Request</b>
+                            <p>A self-service return request flow is designed to meet Australian Consumer Law requirements, giving customers a clear and easy path for returns.</p>
+                        </li>
+                    </ul>
+                    <img src="img/krisshop-australia/krisshop-australia-seller.jpg" class="img-fluid" alt="Seller Ecosystem" loading="lazy" style="border-radius: 8px; box-shadow: 0 2px 20px rgba(0,0,0,0.08);">
                 </div>
             </div>
 
@@ -820,8 +874,8 @@
             </div>
         </footer>
         <!-- /main content -->
-        <!-- Critical JavaScript: jQuery (keep synchronous - other scripts depend on it) -->
-        <script src="vendor/jquery/jquery.min.js"></script>
+        <!-- JavaScript -->
+        <script src="vendor/jquery/jquery.min.js" defer></script>
         <!-- Non-critical JavaScript: Defer loading -->
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
         <script src="vendor/jquery-easing/jquery.easing.min.js" defer></script>

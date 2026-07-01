@@ -17,9 +17,7 @@ $(document).ready(function() {
 
 win.on('load', function() {
 
-    setTimeout(function() {
-        $('#preloader').addClass('hide');
-    }, 1000);
+    $('#preloader').addClass('hide');
 
     // load functions
     grid();
@@ -461,5 +459,19 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener("resize", computeScale);
 
   computeScale();
-  mountScreens();
+
+  // Lazy-load screen images only when the scroll story enters the viewport
+  if ('IntersectionObserver' in window) {
+    var imgObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          mountScreens();
+          imgObserver.disconnect();
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+    imgObserver.observe(stage);
+  } else {
+    mountScreens();
+  }
 })();
