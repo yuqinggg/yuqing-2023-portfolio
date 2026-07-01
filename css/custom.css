@@ -246,21 +246,18 @@ html { scroll-behavior: smooth; }
   border-right: 1px solid rgba(0,0,0,0.07);
   z-index: 5;
 }
-#mr-stage .left h1 {
-  font-family: 'Libre Baskerville', Georgia, serif;
+#mr-stage .left h3 {
   font-weight: 700;
-  font-size: 38px;
-  line-height: 1.12;
-  letter-spacing: -0.01em;
-  margin: 0 0 20px;
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 8px 0 16px;
   color: var(--ink);
 }
 #mr-stage .left .intro {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.65;
   color: #6B6B6B;
   margin: 0;
-  max-width: 30ch;
 }
 
 /* step nav */

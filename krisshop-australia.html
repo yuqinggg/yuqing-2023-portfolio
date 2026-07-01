@@ -25,6 +25,44 @@
         </noscript>
         <style>
             /* Localisation gallery */
+            /* Localisation Gallery — left-right layout (mirrors Miles Redemption) */
+            #loc-stage {
+                display: flex;
+                align-items: flex-start;
+                background: #F1F2F4;
+                font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            }
+            #loc-stage .loc-left {
+                position: sticky;
+                top: 0;
+                flex: none;
+                width: 340px;
+                min-height: 100vh;
+                padding: 56px 44px;
+                display: flex;
+                flex-direction: column;
+                background: #fff;
+                border-right: 1px solid rgba(0,0,0,0.07);
+            }
+            #loc-stage .loc-left h3 {
+                font-size: 26px;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 8px 0 16px;
+                color: #0B0B0B;
+            }
+            #loc-stage .loc-left .loc-intro {
+                font-size: 14px;
+                line-height: 1.65;
+                color: #6B6B6B;
+                margin: 0;
+            }
+            #loc-stage .loc-right {
+                flex: 1;
+                padding: 48px 56px;
+                display: flex;
+                flex-direction: column;
+            }
             .loc-stage-nav {
                 display: flex;
                 border: 1px solid #dee2e6;
@@ -59,14 +97,23 @@
                 color: #adb5bd;
             }
             .loc-stage-btn.active .loc-stage-num { color: #adb5bd; }
-            .loc-gallery-frame { display: none; }
+            .loc-gallery-frame { display: none; width: 100%; }
             .loc-gallery-frame.active { display: block; }
             .loc-gallery-frame img {
                 border-radius: 8px;
                 box-shadow: 0 2px 20px rgba(0,0,0,0.08);
                 width: 100%;
             }
-            @media (max-width: 576px) {
+            @media (max-width: 768px) {
+                #loc-stage { flex-direction: column; }
+                #loc-stage .loc-left {
+                    position: static;
+                    width: 100%;
+                    padding: 32px 24px;
+                    border-right: none;
+                    border-bottom: 1px solid rgba(0,0,0,0.07);
+                }
+                #loc-stage .loc-right { padding: 24px; }
                 .loc-stage-label { display: none; }
                 .loc-stage-btn { font-size: 10px; padding: 10px 4px; }
             }
@@ -200,40 +247,31 @@
                 color: #111827;
                 margin: 0 0 14px;
             }
+            #loc-stage .eyebrow {
+                font-size: 13px;
+                font-weight: 800;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #C0C0C0;
+                margin-bottom: 14px;
+            }
             .loc-annot-callout {
-                background: #eff6ff;
-                border-left: 3px solid #3b82f6;
+                background: #F3F5FF;
+                border-left: 3px solid #1937CD;
+                border-radius: 0 12px 12px 0;
                 padding: 12px 14px;
                 margin-bottom: 18px;
             }
             .loc-annot-callout-label {
-                font-size: 11px;
+                font-size: 13px;
                 font-weight: 700;
-                color: #3b82f6;
-                letter-spacing: 0.08em;
+                color: #1937CD;
+                letter-spacing: 0.18em;
                 text-transform: uppercase;
                 margin: 0 0 6px;
+
             }
-            .loc-annot-callout-body {
-                font-size: 13px;
-                color: #374151;
-                margin: 0;
-                line-height: 1.6;
-            }
-            .loc-why-label {
-                font-size: 11px;
-                font-weight: 600;
-                color: #9ca3af;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                margin: 0 0 6px;
-            }
-            .loc-why-body {
-                font-size: 13px;
-                color: #374151;
-                line-height: 1.6;
-                margin: 0;
-            }
+
             @media (max-width: 576px) {
                 .loc-conf-grid { flex-direction: column; }
                 .loc-conf-card-col { flex: 0 0 100%; width: 100%; }
@@ -426,40 +464,16 @@
                 </div>
             </div> -->
 
-            <!-- Miles Redemption -->
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-5">
-                    <div class="col-md-2">
-                        <p class="headline-subtitle">Miles Redemption</p>
-                    </div>
-                    <div class="col-md-8">
-                        <h3>Key Business Objective for the New Market</h3>
-                        <p>With over 1 million untapped KrisFlyer miles sitting in Australian accounts annually, miles redemption is the central value proposition of the Australian launch. Flight redemptions have limited inventory and high competition; KrisShop gives members a tangible, immediate way to spend their miles. The design ensures miles are not buried — they are surfaced as a primary currency throughout the entire user journey.</p>
-                    </div>
-                </div>
-            </div>
-  
-</figure>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-5">
-                    <div class="col-md-8 offset-md-2">
-                        <h3></h3>
-                    </div>
-                </div>
-            </div>
-
             <!-- Miles Redemption Scroll Story -->
             <div class="container-fluid px-0 mt-4 mb-5">
               <div id="mr-stage">
 
                 <!-- STATIC LEFT COLUMN -->
+
                 <aside class="left">
                   <div>
-                    <h3>Miles Redemption Across the User Flow</h3>
+                    <p class="loc-label">II. NEW MARKET BUSINESS OBJECTIVE</p>
+                        <h3>Miles Redemption Across the User Flow</h3>
                     <p class="intro">
                         With over 1 million untapped KrisFlyer miles sitting in Australian accounts annually, miles redemption is the central value proposition of the Australian launch. Flight redemptions have limited inventory and high competition; KrisShop gives members a tangible, immediate way to spend their miles. The design ensures miles are not buried — they are surfaced as a primary currency throughout the entire user journey.
                     </p>
@@ -539,22 +553,18 @@
             </div>
 
             <!-- Localisation Gallery -->
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-5">
-                    <div class="col-md-2">
-                        <p class="headline-subtitle">Localisation</p>
+            <div class="container-fluid px-0 mt-4 mb-5" id="loc-stage">
+                <!-- LEFT nav -->
+                <aside class="loc-left">
+                    <div>
+                        <p class="loc-label">II. LOCALISATION</p>
+                        <h3>Adapting for Australian Shoppers</h3>
+                        <p class="loc-intro">Localising KrisShop for Australia went beyond currency conversion. Each checkout touchpoint was reviewed and adapted — from how prices display, to how miles and vouchers apply, to what members see after purchase.</p>
                     </div>
-                    <div class="col-md-8">
-                        <h3>2. Adapting for Australian Shoppers</h3>
-                        <p>Localising KrisShop for Australia went beyond currency conversion. Each checkout touchpoint was reviewed and adapted — from how prices display, to how miles and vouchers apply, to what members see after purchase.</p>
-                    </div>
-                </div>
-            </div>
+                </aside>
 
-            <div class="container mt-4 mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <div class="gallery" title="Localisation Gallery">
+                <!-- RIGHT content -->
+                <div class="loc-right">
                         <!-- Stage nav -->
                         <div class="loc-stage-nav">
                             <button class="loc-stage-btn active" onclick="locGoTo(0)">
@@ -574,7 +584,6 @@
                                 <span class="loc-stage-label">Order Confirmation</span>
                             </button>
                         </div>
-                        <!-- Gallery frames -->
                         <div class="loc-gallery-frame active" id="loc-0">
                             <div class="loc-conf-wrap">
                                 <div class="loc-conf-grid">
@@ -609,12 +618,11 @@
                                         </div>
                                     </div>
                                     <div class="loc-conf-annot-col">
-                                        <p class="loc-annot-screen-title">Screen 1 — Cart in AUD</p>
                                         <div class="loc-annot-callout">
                                             <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
-                                            <p class="loc-annot-callout-body">All prices display in AUD (A$), not SGD. Miles balance is shown prominently to prompt redemption — a behaviour AU frequent flyers expect.</p>
+                                            <p>All prices display in AUD (A$), not SGD. Miles balance is shown prominently to prompt redemption — a behaviour AU frequent flyers expect.</p>
                                         </div>
-                                        <p class="loc-why-label">WHY IT MATTERS</p>
+                                        <p class="loc-label">WHY IT MATTERS</p>
                                         <p class="loc-why-body"> The logical solution was to surface AUD pricing upfront, enabling faster comprehension and reducing drop-off before checkout.</p>
                                     </div>
                                 </div>
@@ -653,13 +661,12 @@
                                         </div>
                                     </div>
                                     <div class="loc-conf-annot-col">
-                                        <p class="loc-annot-screen-title">Screen 2 — Miles Redemption</p>
                                         <div class="loc-annot-callout">
                                             <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
-                                            <p class="loc-annot-callout-body">AU has a distinct redemption cap rule (10% of order value) absent from the SG flow. The constraint is surfaced inline — not hidden in T&Cs.</p>
+                                            <p>AU has a distinct redemption cap rule (10% of order value) absent from the SG flow. The constraint is surfaced inline — not hidden in T&Cs.</p>
                                         </div>
-                                        <p class="loc-why-label">WHY IT MATTERS</p>
-                                        <p class="loc-why-body">Testing showed users felt deceived when the cap appeared only at the final step. Moving it here reduced drop-off and support tickets.</p>
+                                        <p class="loc-label">WHY IT MATTERS</p>
+                                        <p>Testing showed users felt deceived when the cap appeared only at the final step. Moving it here reduced drop-off and support tickets.</p>
                                     </div>
                                 </div>
                             </div>
@@ -699,13 +706,12 @@
                                         </div>
                                     </div>
                                     <div class="loc-conf-annot-col">
-                                        <p class="loc-annot-screen-title">Screen 3 — Voucher Redemption</p>
                                         <div class="loc-annot-callout">
                                             <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
-                                            <p class="loc-annot-callout-body">Annual loyalty vouchers are applied after miles in the AU flow — a sequencing rule required by AU commerce logic, different from SG's simultaneous application.</p>
+                                            <p>Annual loyalty vouchers are applied after miles in the AU flow — a sequencing rule required by AU commerce logic, different from SG's simultaneous application.</p>
                                         </div>
-                                        <p class="loc-why-label">WHY IT MATTERS</p>
-                                        <p class="loc-why-body">The sequencing order affected the final payable amount. Making this visible (not silent) gave users trust that both discounts were applied correctly.</p>
+                                        <p class="loc-label">WHY IT MATTERS</p>
+                                        <p>The sequencing order affected the final payable amount. Making this visible (not silent) gave users trust that both discounts were applied correctly.</p>
                                     </div>
                                 </div>
                             </div>
@@ -761,21 +767,18 @@
                                         </div>
                                     </div>
                                     <div class="loc-conf-annot-col">
-                                        <p class="loc-annot-screen-title">Screen 4 — Order Confirmation</p>
                                         <div class="loc-annot-callout">
                                             <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
-                                            <p class="loc-annot-callout-body">Full payment breakdown shown in AUD, with a clear miles-earned summary — an AU KrisFlyer expectation from the loyalty programme.</p>
+                                            <p>Full payment breakdown shown in AUD, with a clear miles-earned summary — an AU KrisFlyer expectation from the loyalty programme.</p>
                                         </div>
-                                        <p class="loc-why-label">WHY IT MATTERS</p>
-                                        <p class="loc-why-body">AU users expected to see the complete picture post-purchase. Omitting the miles-earned line in early prototypes caused uncertainty about whether the loyalty programme had worked.</p>
+                                        <p class="loc-label">WHY IT MATTERS</p>
+                                        <p>AU users expected to see the complete picture post-purchase. Omitting the miles-earned line in early prototypes caused uncertainty about whether the loyalty programme had worked.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div><!-- /.gallery -->
-                    </div>
-                </div>
-            </div>
+                </div><!-- /.loc-right -->
+            </div><!-- /#loc-stage -->
 
             <!-- Seller Ecosystem -->
             <div class="container">
