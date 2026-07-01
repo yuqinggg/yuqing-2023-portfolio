@@ -375,3 +375,91 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(updateContentTestingGallery, 3000);
     }
 });
+
+/* ============================================================
+   Miles Redemption Scroll Story
+   ============================================================ */
+(function () {
+  "use strict";
+
+  if (!document.getElementById("mr-stage")) return;
+
+  var SCREEN_IMAGES = [
+    "img/krisshop-australia/KSO_AU_Homepage.png",
+    "img/krisshop-australia/KSO_AU_CampaignPage.png",
+    "img/krisshop-australia/KSO_AU_PDP.jpg",
+    "img/krisshop-australia/KSO_AU_Bag.jpg"
+  ];
+
+  function mountScreens() {
+    SCREEN_IMAGES.forEach(function (src, i) {
+      var slot = document.getElementById("mr-screen-" + i);
+      if (slot) {
+        var img = document.createElement("img");
+        img.src = src;
+        img.alt = "";
+        img.style.cssText = "width:393px;height:852px;object-fit:cover;display:block;";
+        slot.appendChild(img);
+      }
+    });
+  }
+
+  var stage = document.getElementById("mr-stage");
+  var phoneScale = document.getElementById("mrPhoneScale");
+  var navButtons = Array.prototype.slice.call(stage.querySelectorAll(".step-btn"));
+  var drivers = Array.prototype.slice.call(stage.querySelectorAll(".driver"));
+  var current = 0;
+
+  function setStep(i) {
+    if (i === current) return;
+    current = i;
+    stage.style.setProperty("--step", i);
+    navButtons.forEach(function (b, n) {
+      b.classList.toggle("is-active", n === i);
+    });
+  }
+
+  function computeScale() {
+    var s = Math.min((480 - 48) / 417, (window.innerHeight - 48) / 900);
+    phoneScale.style.setProperty("--scale", s);
+  }
+
+  navButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var i = parseInt(btn.getAttribute("data-step"), 10);
+      var d = drivers[i];
+      if (!d) return;
+      var scroller = document.scrollingElement || document.documentElement;
+      var r = d.getBoundingClientRect();
+      var target = scroller.scrollTop + r.top + r.height / 2 - window.innerHeight / 2;
+      scroller.scrollTo({ top: target, behavior: "smooth" });
+    });
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        var i = drivers.indexOf(e.target);
+        if (i >= 0) setStep(i);
+      }
+    });
+  }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+  drivers.forEach(function (d) { io.observe(d); });
+
+  function onScroll() {
+    var mid = window.innerHeight / 2;
+    var best = 0, bestD = Infinity;
+    drivers.forEach(function (d, i) {
+      var r = d.getBoundingClientRect();
+      var dist = Math.abs(r.top + r.height / 2 - mid);
+      if (dist < bestD) { bestD = dist; best = i; }
+    });
+    setStep(best);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+  document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+  window.addEventListener("resize", computeScale);
+
+  computeScale();
+  mountScreens();
+})();

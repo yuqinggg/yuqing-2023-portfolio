@@ -10,6 +10,10 @@
         <title>YuQing's Portfolio | KrisShop Australia</title>
         <!-- Critical CSS: Fonts (keep synchronous) -->
         <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+        <!-- Google Fonts for Miles Redemption scroll story -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap">
         <!-- Non-critical CSS: Load asynchronously -->
         <link rel="preload" href="vendor/bootstrap/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -19,10 +23,6 @@
             <link href="css/style.css" rel="stylesheet">
             <link href="css/custom.css" rel="stylesheet">
         </noscript>
-        <!-- Critical CSS: Preloader (inline to prevent FOUC) -->
-        <style>
-            #preloader { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 999; background: #fff; }
-        </style>
         <style>
             /* Localisation gallery */
             .loc-stage-nav {
@@ -289,7 +289,7 @@
         </div>
         <!-- Navigation -->
         <div class="bg-img-5">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-transparent py-3 navbar-theme-dark" id="mainNav" data-navbar-theme="dark">
+            <nav class="navbar navbar-expand-sm navbar-light bg-transparent py-3" id="mainNav">
                 <div class="container">
                     <a class="navbar-brand js-scroll-trigger" href="index.html">Tay Yu Qing</a>
                     <button
@@ -438,12 +438,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container mt-5 mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <figure>
-  <img src="img/krisshop-australia/krisshop-australia-miles-overview.jpg" class="img-fluid mx-auto d-block" alt="Miles Redemption Overview" loading="lazy">
   
 </figure>
                     </div>
@@ -453,69 +447,95 @@
             <div class="container">
                 <div class="row d-flex justify-content-center mt-5">
                     <div class="col-md-8 offset-md-2">
-                        <h3>1. Miles Redemption Across the User Flow</h3>
-                    </div>
-                    <div class="col-md-8 offset-md-2 mt-3">
-                        <p><b>Homepage</b> — Miles balance is prominently featured on the homepage, immediately signposting to KrisFlyer members that their miles are spendable here. This anchors the value proposition from the moment a member lands on the site.</p>
+                        <h3></h3>
                     </div>
                 </div>
             </div>
 
-            <div class="container mt-4 mb-4">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <img src="img/krisshop-australia/krisshop-australia-miles-homepage.jpg" class="img-fluid mx-auto d-block" alt="Miles on Homepage" loading="lazy">
-                        <figcaption class="text-muted text-center small mt-2">Mockup used to illustrate how the new homepage contains features to encourage more miles redemption.</figcaption>
-                    </div>
-                </div>
-            </div>
+            <!-- Miles Redemption Scroll Story -->
+            <div class="container-fluid px-0 mt-4 mb-5">
+              <div id="mr-stage">
 
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-3">
-                    <div class="col-md-8 offset-md-2">
-                        <p><b>Campaign Page</b> — A dynamic miles redemption landing page drives discovery, showcasing participating products and communicating the savings available when redeeming miles. This page adapts based on available promotions to keep the offer feeling current.</p>
-                    </div>
-                </div>
-            </div>
+                <!-- STATIC LEFT COLUMN -->
+                <aside class="left">
+                  <div>
+                    <h3>Miles Redemption Across the User Flow</h3>
+                    <p class="intro">
+                        With over 1 million untapped KrisFlyer miles sitting in Australian accounts annually, miles redemption is the central value proposition of the Australian launch. Flight redemptions have limited inventory and high competition; KrisShop gives members a tangible, immediate way to spend their miles. The design ensures miles are not buried — they are surfaced as a primary currency throughout the entire user journey.
+                    </p>
+                  </div>
 
-            <div class="container mt-4 mb-4">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <img src="img/krisshop-australia/krisshop-australia-miles-campaign.jpg" class="img-fluid mx-auto d-block" alt="Campaign Page" loading="lazy">
-                    </div>
-                </div>
-            </div>
+                  <nav class="steps-nav" id="mrStepsNav">
+                    <button class="step-btn is-active" data-step="0">
+                      <span class="dot">01</span>
+                      <span class="labels"><span class="lbl">Balance</span><span class="scr">Homepage</span></span>
+                    </button>
+                    <button class="step-btn" data-step="1">
+                      <span class="dot">02</span>
+                      <span class="labels"><span class="lbl">Discover</span><span class="scr">Redeem Miles</span></span>
+                    </button>
+                    <button class="step-btn" data-step="2">
+                      <span class="dot">03</span>
+                      <span class="labels"><span class="lbl">Product</span><span class="scr">Product page</span></span>
+                    </button>
+                    <button class="step-btn" data-step="3">
+                      <span class="dot">04</span>
+                      <span class="labels"><span class="lbl">Checkout</span><span class="scr">Shopping bag</span></span>
+                    </button>
+                  </nav>
 
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-3">
-                    <div class="col-md-8 offset-md-2">
-                        <p><b>Product Listing Page (PLP)</b> — Miles are presented as the primary currency for miles burners, with miles pricing displayed alongside AUD pricing on every product card. This makes it easy for members to compare and identify the best value for their miles.</p>
-                    </div>
-                </div>
-            </div>
+                  <div class="hint">Scroll to step through the flow →</div>
+                </aside>
 
-            <div class="container mt-4 mb-4">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <img src="img/krisshop-australia/krisshop-australia-miles-plp.jpg" class="img-fluid mx-auto d-block" alt="PLP Miles" loading="lazy">
+                <!-- STICKY CENTER PHONE -->
+                <div class="center">
+                  <div class="phone-scale" id="mrPhoneScale">
+                    <div class="bezel">
+                      <div class="screen">
+                        <div class="notch"></div>
+                        <div class="film phone-film">
+                          <div class="screen-slot" id="mr-screen-0"></div>
+                          <div class="screen-slot" id="mr-screen-1"></div>
+                          <div class="screen-slot" id="mr-screen-2"></div>
+                          <div class="screen-slot" id="mr-screen-3"></div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
 
-            <div class="container">
-                <div class="row d-flex justify-content-center mt-3">
-                    <div class="col-md-8 offset-md-2">
-                        <p><b>Checkout</b> — At checkout, members can apply their KrisFlyer miles for cost savings, with clear feedback on how many miles will be used and the resulting AUD saving. The flow is designed to reduce friction and encourage miles redemption at the point of purchase.</p>
+                <!-- STICKY RIGHT COLUMN -->
+                <main class="right">
+                  <div class="pin">
+                    <div class="film text-film">
+                      <div class="panel">
+                        <div class="eyebrow">01 — Homepage</div>
+                        <p>Miles balance is prominently featured on the homepage, immediately signposting to KrisFlyer members that their miles are spendable here. This anchors the value proposition from the moment a member lands on the site.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">02 — Campaign Page</div>
+                        <p>A dynamic miles redemption landing page drives discovery, showcasing participating products and communicating the savings available when redeeming miles. This page adapts based on available promotions to keep the offer feeling current.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">03 — Product page</div>
+                        <p>Miles are presented as the primary currency for miles burners, with miles pricing displayed alongside AUD pricing on every product card. This makes it easy for members to compare and identify the best value for their miles.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">04 — Shopping bag</div>
+                        <p>At bag, potential cost savings are displayed to customers based on their KrisFlyer milesbalance. With clear feedback on how many miles will be used and the resulting AUD saving. The flow is designed to reduce friction and encourage miles redemption at the point of purchase.</p>
+                      </div>
                     </div>
-                </div>
-            </div>
+                  </div>
+                  <!-- scroll drivers -->
+                  <div class="drivers">
+                    <div class="driver" data-step="0"></div>
+                    <div class="driver" data-step="1"></div>
+                    <div class="driver" data-step="2"></div>
+                    <div class="driver" data-step="3"></div>
+                  </div>
+                </main>
 
-            <div class="container mt-4 mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <img src="img/krisshop-australia/krisshop-australia-miles-checkout.jpg" class="img-fluid mx-auto d-block" alt="Checkout Miles" loading="lazy">
-                    </div>
-                </div>
+              </div>
             </div>
 
             <!-- Localisation Gallery -->

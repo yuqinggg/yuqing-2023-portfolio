@@ -208,3 +208,185 @@ a {
     max-width: 100%;
   }
 }
+
+/* ============================================================
+   Miles Redemption Scroll Story — namespaced to #mr-stage
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
+
+#mr-stage {
+  --accent: #1937CD;
+  --ink: #0B0B0B;
+  --page-bg: #F1F2F4;
+  --panel-bg: #FFFFFF;
+  --screen-h: 852px;
+  --step: 0;
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1A1A1A;
+  background: var(--page-bg);
+}
+
+/* ---------- LEFT (static) ---------- */
+#mr-stage .left {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  flex: none;
+  width: 340px;
+  height: 100vh;
+  padding: 56px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--panel-bg);
+  border-right: 1px solid rgba(0,0,0,0.07);
+  z-index: 5;
+}
+#mr-stage .left h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+#mr-stage .left .intro {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #6B6B6B;
+  margin: 0;
+  max-width: 30ch;
+}
+
+/* step nav */
+#mr-stage .steps-nav { display: flex; flex-direction: column; gap: 2px; margin: 36px 0; }
+#mr-stage .step-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: calc(100% + 24px);
+  margin: 0 -12px;
+  padding: 11px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: #8A8A8A;
+  font-family: inherit;
+  transition: background .25s ease, color .25s ease;
+}
+#mr-stage .step-btn .dot {
+  flex: none;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  background: #EDEDED; color: #A0A0A0;
+  transition: all .25s ease;
+}
+#mr-stage .step-btn .labels { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+#mr-stage .step-btn .lbl { font-weight: 700; font-size: 14px; }
+#mr-stage .step-btn .scr { font-size: 11.5px; color: #9A9A9A; font-weight: 500; }
+#mr-stage .step-btn.is-active { background: #F3F5FF; color: var(--ink); }
+#mr-stage .step-btn.is-active .dot { background: var(--accent); color: #fff; }
+#mr-stage .hint { font-size: 11px; color: #B4B4B4; letter-spacing: 0.04em; }
+
+/* ---------- CENTER (sticky phone) ---------- */
+#mr-stage .center {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  flex: none;
+  width: 480px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+#mr-stage .phone-scale {
+  transform: scale(var(--scale, 1));
+  transform-origin: center center;
+}
+#mr-stage .bezel {
+  position: relative;
+  width: 417px; height: 876px;
+  background: #0A0A0C;
+  border-radius: 58px;
+  padding: 12px;
+  box-shadow: 0 40px 90px -30px rgba(10,16,40,0.55), 0 0 0 2px rgba(255,255,255,0.06) inset;
+}
+#mr-stage .screen {
+  position: relative;
+  width: 393px; height: var(--screen-h);
+  border-radius: 46px;
+  overflow: hidden;
+  background: #fff;
+}
+#mr-stage .notch {
+  position: absolute;
+  top: 11px; left: 50%;
+  transform: translateX(-50%);
+  width: 124px; height: 34px;
+  background: #0A0A0C;
+  border-radius: 18px;
+  z-index: 20;
+}
+
+/* film strips */
+#mr-stage .film { transition: transform 0.85s cubic-bezier(0.65,0.02,0.18,1); }
+#mr-stage .phone-film {
+  position: absolute;
+  top: 0; left: 0;
+  width: 393px;
+  transform: translateY(calc(var(--step) * -1 * var(--screen-h)));
+}
+#mr-stage .screen-slot { width: 393px; height: var(--screen-h); overflow: hidden; }
+
+/* ---------- RIGHT (sticky, slides in sync) ---------- */
+#mr-stage .right {
+  flex: 1;
+  min-width: 380px;
+  position: relative;
+}
+#mr-stage .pin {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  background: var(--page-bg);
+}
+#mr-stage .text-film {
+  transform: translateY(calc(var(--step) * -100vh));
+}
+#mr-stage .panel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6vw 0 3vw;
+}
+#mr-stage .panel .eyebrow {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C0C0C0;
+  margin-bottom: 10px;
+}
+#mr-stage .panel p {
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: #4A4A4A;
+  margin: 0;
+  max-width: 46ch;
+}
+#mr-stage .drivers .driver { height: 100vh; }
