@@ -109,56 +109,17 @@
                 width: 100%;
             }
             @media (max-width: 768px) {
-                #loc-stage, #sel-stage { flex-direction: column; }
-                #loc-stage .loc-left, #sel-stage .loc-left {
+                #loc-stage { flex-direction: column; }
+                #loc-stage .loc-left {
                     position: static;
                     width: 100%;
                     padding: 32px 24px;
                     border-right: none;
                     border-bottom: 1px solid rgba(0,0,0,0.07);
                 }
-                #loc-stage .loc-right, #sel-stage .loc-right { padding: 24px; }
+                #loc-stage .loc-right { padding: 24px; }
                 .loc-stage-label { display: none; }
                 .loc-stage-btn { font-size: 10px; padding: 10px 4px; }
-            }
-
-            /* Seller Ecosystem — shares left/right layout with Localisation */
-            #sel-stage {
-                display: flex;
-                align-items: flex-start;
-                background: #F1F2F4;
-                font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            }
-            #sel-stage .loc-left {
-                position: sticky;
-                top: 0;
-                flex: none;
-                width: 340px;
-                min-height: 100vh;
-                padding: 56px 44px;
-                display: flex;
-                flex-direction: column;
-                background: #fff;
-                border-right: 1px solid rgba(0,0,0,0.07);
-            }
-            #sel-stage .loc-left h3 {
-                font-size: 26px;
-                font-weight: 700;
-                line-height: 1.2;
-                margin: 8px 0 16px;
-                color: #0B0B0B;
-            }
-            #sel-stage .loc-left .loc-intro {
-                font-size: 14px;
-                line-height: 1.65;
-                color: #6B6B6B;
-                margin: 0 0 24px;
-            }
-            #sel-stage .loc-right {
-                flex: 1;
-                padding: 48px 56px;
-                display: flex;
-                flex-direction: column;
             }
 
             /* Localisation — Confirmation screen (coded) */
@@ -697,10 +658,10 @@
                                                 <div class="loc-conf-divider"></div>
                                                 <div class="loc-conf-row font-bold">
                                                     <span>Max Redeemable</span>
-                                                    <span>9,000</span>
+                                                    <span>8,100</span>
                                                 </div>
                                                 <div class="loc-miles-cap-note">
-                                                    For partial miles redemption, miles can cover up to 10% of order value
+                                                    Miles redemption are not subjected to GST, saving you 10%!
                                                 </div>
                                             </div>
                                             <button class="loc-conf-cta">PROCEED TO CHECKOUT</button>
@@ -709,10 +670,12 @@
                                     <div class="loc-conf-annot-col">
                                         <div class="loc-annot-callout">
                                             <p class="loc-annot-callout-label">AU LOCALISATION CHANGE</p>
-                                            <p>AU has a distinct redemption cap rule (10% of order value) absent from the SG flow. The constraint is surfaced inline — not hidden in T&Cs.</p>
+                                            <p>AU has a distinct redemption rule whereby amount redeemed with miles are not subjected to taxes. This is absent from the SG flow. The cost-saving is surfaced inline. </p>
                                         </div>
                                         <p class="loc-label">WHY IT MATTERS</p>
-                                        <p>Testing showed users felt deceived when the cap appeared only at the final step. Moving it here reduced drop-off and support tickets.</p>
+                                        <p>
+The AU flow needed to surface the tax-saving benefit of miles redemption, which was not present in the SG flow. This was a key motivator for AU members to redeem miles, and it was important to make this clear and visible in the checkout flow.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -818,7 +781,7 @@
                                             <p>Full payment breakdown shown in AUD, with a clear miles-earned summary — an AU KrisFlyer expectation from the loyalty programme.</p>
                                         </div>
                                         <p class="loc-label">WHY IT MATTERS</p>
-                                        <p>AU users expected to see the complete picture post-purchase. Omitting the miles-earned line in early prototypes caused uncertainty about whether the loyalty programme had worked.</p>
+                                        <p>Including the miles-earned line gives members a clearer post-purchase summary and makes the loyalty benefit more visible.</p>
                                     </div>
                                 </div>
                             </div>
@@ -829,36 +792,102 @@
             </div><!-- /#loc-stage -->
             
 
-            <!-- Seller Ecosystem -->
-            <div class="container-fluid px-0 mt-4 mb-5" id="sel-stage">
-                <aside class="loc-left">
-                    <div>
-                        <p class="loc-label">III. SELLER ECOSYSTEM</p>
-                        <h3>New Marketplace Capabilities</h3>
-                        <p class="loc-intro">The Australian launch also introduced new seller ecosystem features to support a marketplace model, giving customers more transparency and control over their purchases.</p>
-                    </div>
+            <!-- Seller Ecosystem Scroll Story -->
+            <div class="container-fluid px-0 mt-4 mb-5">
+              <div id="sel-stage">
+
+                <!-- STATIC LEFT COLUMN -->
+
+                <aside class="left">
+                  <div>
+                    <p class="loc-label">III. NEW MARKETPLACE CAPABILITIES</p>
+                        <h3>Seller Ecosystem</h3>
+                    <p class="intro">
+                        The Australian launch also introduced new seller ecosystem features to support a marketplace model, giving customers more transparency and control over their purchases.
+                    </p>
+                  </div>
+
+                  <nav class="steps-nav" id="selStepsNav">
+                    <button class="step-btn is-active" data-step="0">
+                      <span class="dot">01</span>
+                      <span class="labels"><span class="lbl">Overview</span><span class="scr">Order Details</span></span>
+                    </button>
+                    <button class="step-btn" data-step="1">
+                      <span class="dot">02</span>
+                      <span class="labels"><span class="lbl">Group Seller</span><span class="scr">Fulfilled by</span></span>
+                    </button>
+                    <button class="step-btn" data-step="2">
+                      <span class="dot">03</span>
+                      <span class="labels"><span class="lbl">Track Order</span><span class="scr">Shipment status</span></span>
+                    </button>
+                    <button class="step-btn" data-step="3">
+                      <span class="dot">04</span>
+                      <span class="labels"><span class="lbl">Contact Seller</span><span class="scr">Support</span></span>
+                    </button>
+                    <button class="step-btn" data-step="4">
+                      <span class="dot">05</span>
+                      <span class="labels"><span class="lbl">Return Request</span><span class="scr">Returns</span></span>
+                    </button>
+                  </nav>
+
+                  <div class="hint">Scroll to step through the flow →</div>
                 </aside>
-                <div class="loc-right">
-                    <ul class="list-unstyled mb-5">
-                        <li class="mb-4">
-                            <b>Group Seller</b>
-                            <p>Products from the same seller are grouped to streamline the browsing and checkout experience, reducing fragmentation when buying from multiple listings.</p>
-                        </li>
-                        <li class="mb-4">
-                            <b>Contact Seller</b>
-                            <p>Customers can reach sellers directly from the product page, supporting pre-purchase queries and building trust with marketplace listings.</p>
-                        </li>
-                        <li class="mb-4">
-                            <b>Track Order</b>
-                            <p>End-to-end order tracking is surfaced within the KrisShop platform, removing the need to navigate to external courier sites.</p>
-                        </li>
-                        <li class="mb-4">
-                            <b>Return Request</b>
-                            <p>A self-service return request flow is designed to meet Australian Consumer Law requirements, giving customers a clear and easy path for returns.</p>
-                        </li>
-                    </ul>
-                    <img src="img/krisshop-australia/krisshop-australia-seller.jpg" class="img-fluid" alt="Seller Ecosystem" loading="lazy" style="border-radius: 8px; box-shadow: 0 2px 20px rgba(0,0,0,0.08);">
+
+                <!-- STICKY CENTER PHONE -->
+                <div class="center">
+                  <div class="phone-scale" id="selPhoneScale">
+                    <div class="bezel">
+                      <div class="screen">
+                        <div class="notch"></div>
+                        <div class="film phone-film">
+                          <div class="screen-slot" id="sel-screen-0"></div>
+                          <div class="screen-slot" id="sel-screen-1"></div>
+                          <div class="screen-slot" id="sel-screen-2"></div>
+                          <div class="screen-slot" id="sel-screen-3"></div>
+                          <div class="screen-slot" id="sel-screen-4"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <!-- STICKY RIGHT COLUMN -->
+                <main class="right">
+                  <div class="pin">
+                    <div class="film text-film">
+                      <div class="panel">
+                        <div class="eyebrow">01 — Order Details</div>
+                        <p>Every order consolidates the seller, shipment breakdown, and available actions into a single view — the foundation the marketplace features below are built on.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">02 — Group Seller</div>
+                        <p>Products from the same seller are grouped under a single fulfiller, streamlining the order view and reducing fragmentation when a purchase spans multiple listings.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">03 — Track Order</div>
+                        <p>End-to-end shipment tracking is surfaced directly within KrisShop, removing the need to navigate to external courier sites to check on a delivery.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">04 — Contact Seller</div>
+                        <p>Customers can reach the seller directly from the order page, supporting post-purchase queries and building trust with marketplace listings.</p>
+                      </div>
+                      <div class="panel">
+                        <div class="eyebrow">05 — Return Request</div>
+                        <p>A self-service return request flow meets Australian Consumer Law requirements, giving customers a clear, guided path to initiate a return.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- scroll drivers -->
+                  <div class="drivers">
+                    <div class="driver" data-step="0"></div>
+                    <div class="driver" data-step="1"></div>
+                    <div class="driver" data-step="2"></div>
+                    <div class="driver" data-step="3"></div>
+                    <div class="driver" data-step="4"></div>
+                  </div>
+                </main>
+
+              </div>
             </div>
 
         </section>

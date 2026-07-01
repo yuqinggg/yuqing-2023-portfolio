@@ -375,23 +375,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ============================================================
-   Miles Redemption Scroll Story
+   Scroll Story (Miles Redemption / Seller Ecosystem)
    ============================================================ */
-(function () {
+function initScrollStage(stageId, phoneScaleId, screenPrefix, images, screenTransition) {
   "use strict";
 
-  if (!document.getElementById("mr-stage")) return;
+  var stage = document.getElementById(stageId);
+  if (!stage) return;
 
-  var SCREEN_IMAGES = [
-    "img/krisshop-australia/KSO_AU_Homepage.png",
-    "img/krisshop-australia/KSO_AU_CampaignPage.png",
-    "img/krisshop-australia/KSO_AU_PDP.jpg",
-    "img/krisshop-australia/KSO_AU_Bag.jpg"
-  ];
+  var crossfade = screenTransition === "fade";
 
   function mountScreens() {
-    SCREEN_IMAGES.forEach(function (src, i) {
-      var slot = document.getElementById("mr-screen-" + i);
+    images.forEach(function (src, i) {
+      var slot = document.getElementById(screenPrefix + "-" + i);
       if (slot) {
         var img = document.createElement("img");
         img.src = src;
@@ -402,11 +398,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  var stage = document.getElementById("mr-stage");
-  var phoneScale = document.getElementById("mrPhoneScale");
+  var phoneScale = document.getElementById(phoneScaleId);
   var navButtons = Array.prototype.slice.call(stage.querySelectorAll(".step-btn"));
   var drivers = Array.prototype.slice.call(stage.querySelectorAll(".driver"));
+  var screenSlots = Array.prototype.slice.call(stage.querySelectorAll(".screen-slot"));
   var current = 0;
+
+  if (crossfade && screenSlots[0]) {
+    screenSlots[0].classList.add("is-active");
+  }
 
   function setStep(i) {
     if (i === current) return;
@@ -415,6 +415,11 @@ document.addEventListener('DOMContentLoaded', function() {
     navButtons.forEach(function (b, n) {
       b.classList.toggle("is-active", n === i);
     });
+    if (crossfade) {
+      screenSlots.forEach(function (s, n) {
+        s.classList.toggle("is-active", n === i);
+      });
+    }
   }
 
   function computeScale() {
@@ -474,4 +479,19 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     mountScreens();
   }
-})();
+}
+
+initScrollStage("mr-stage", "mrPhoneScale", "mr-screen", [
+  "img/krisshop-australia/KSO_AU_Homepage.png",
+  "img/krisshop-australia/KSO_AU_CampaignPage.png",
+  "img/krisshop-australia/KSO_AU_PDP.jpg",
+  "img/krisshop-australia/KSO_AU_Bag.jpg"
+]);
+
+initScrollStage("sel-stage", "selPhoneScale", "sel-screen", [
+  "img/krisshop-australia/seller-ecosystem-00.jpg",
+  "img/krisshop-australia/seller-ecosystem-01.jpg",
+  "img/krisshop-australia/seller-ecosystem-02.jpg",
+  "img/krisshop-australia/seller-ecosystem-03.jpg",
+  "img/krisshop-australia/seller-ecosystem-04.jpg"
+], "fade");
