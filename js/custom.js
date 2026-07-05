@@ -483,18 +483,18 @@ function initScrollStage(stageId, phoneScaleId, screenPrefix, images, screenTran
 }
 
 initScrollStage("mr-stage", "mrPhoneScale", "mr-screen", [
-  "img/krisshop-australia/KSO_AU_Homepage.png",
-  "img/krisshop-australia/KSO_AU_CampaignPage.png",
-  "img/krisshop-australia/KSO_AU_PDP.jpg",
-  "img/krisshop-australia/KSO_AU_Bag.jpg"
+  "img/krisshop-australia/KSO_AU_Homepage.webp",
+  "img/krisshop-australia/KSO_AU_CampaignPage.webp",
+  "img/krisshop-australia/KSO_AU_PDP.webp",
+  "img/krisshop-australia/KSO_AU_Bag.webp"
 ]);
 
 initScrollStage("loc-stage", null, null, []);
 
 initScrollStage("sel-stage", "selPhoneScale", "sel-screen", [
-  "img/krisshop-australia/seller-ecosystem-00.jpg",
-  "img/krisshop-australia/seller-ecosystem-01.jpg",
-  "img/krisshop-australia/seller-ecosystem-02.jpg",
-  "img/krisshop-australia/seller-ecosystem-03.jpg",
-  "img/krisshop-australia/seller-ecosystem-04.jpg"
+  "img/krisshop-australia/seller-ecosystem-00.webp",
+  "img/krisshop-australia/seller-ecosystem-01.webp",
+  "img/krisshop-australia/seller-ecosystem-02.webp",
+  "img/krisshop-australia/seller-ecosystem-03.webp",
+  "img/krisshop-australia/seller-ecosystem-04.webp"
 ], "fade");

@@ -42,6 +42,7 @@ Eliminated render blocking CSS and JavaScript to improve First Contentful Paint 
 - `interlogue.html` ✓
 - `pps-voucher.html` ✓
 - `project-101.html` ✓
+- `krisshop-australia.html` ✓ (WebP conversion complete)
 
 ### Benefit
 - Faster First Contentful Paint (FCP)
@@ -49,6 +50,21 @@ Eliminated render blocking CSS and JavaScript to improve First Contentful Paint 
 - Better user experience with immediate visual feedback
 
 ## 3. **Image Format Optimization**
+
+### WebP Conversion — KrisShop Australia (Completed 2026-07-06)
+All KrisShop Australia images converted to WebP format with significant file size reductions:
+
+**Key Performance Improvements:**
+- `KSO_AU_Homepage.png`: 56K → 40K (29% reduction)
+- `KSO_AU_CampaignPage.png`: 52K → 36K (31% reduction)
+- `krisshop-australia-thumbnail.jpg`: 52K → 36K (31% reduction)
+- `krisshop-australia-cover.jpg`: 88K → 60K (32% reduction)
+- Scroll story images (seller ecosystem): ~17-20% reduction per image
+
+**Updated Files:**
+- ✓ `js/custom.js` — Updated scroll story image paths to use `.webp`
+- ✓ `krisshop-australia.html` — Updated static image references to use `.webp`
+- ✓ `index.html` — Updated thumbnail to use `.webp`
 
 ### Using TinyPNG for Compression
 Run this command before adding images to the site:
