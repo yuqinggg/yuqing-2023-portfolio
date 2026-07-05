@@ -28,102 +28,11 @@
             <link href="css/custom.css" rel="stylesheet">
         </noscript>
         <style>
-            /* Localisation gallery */
-            /* Localisation Gallery — left-right layout (mirrors Miles Redemption) */
-            #loc-stage {
-                display: flex;
-                align-items: flex-start;
-                background: #F1F2F4;
-                font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            }
-            #loc-stage .loc-left {
-                position: sticky;
-                top: 0;
-                flex: none;
-                width: 340px;
-                min-height: 100vh;
-                padding: 56px 44px;
-                display: flex;
-                flex-direction: column;
-                background: #fff;
-                border-right: 1px solid rgba(0,0,0,0.07);
-            }
-            #loc-stage .loc-left h3 {
-                font-size: 26px;
-                font-weight: 700;
-                line-height: 1.2;
-                margin: 8px 0 16px;
-                color: #0B0B0B;
-            }
-            #loc-stage .loc-left .loc-intro {
-                font-size: 14px;
-                line-height: 1.65;
-                color: #6B6B6B;
-                margin: 0 0 24px;
-            }
-            #loc-stage .loc-right {
-                flex: 1;
-                padding: 48px 56px;
-                display: flex;
-                flex-direction: column;
-            }
-            .loc-stage-nav {
-                display: flex;
-                border: 1px solid #dee2e6;
-                border-radius: 8px;
-                overflow: hidden;
-                margin-bottom: 20px;
-            }
-            .loc-stage-btn {
-                flex: 1;
-                padding: 12px 8px;
-                background: #fff;
-                border: none;
-                border-right: 1px solid #dee2e6;
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 3px;
-                font-family: inherit;
-                font-size: 12px;
-                font-weight: 500;
-                color: #6c757d;
-                transition: background 0.2s, color 0.2s;
-            }
-            .loc-stage-btn:last-child { border-right: none; }
-            .loc-stage-btn:hover:not(.active) { background: #f8f9fa; color: #333; }
-            .loc-stage-btn.active { background: #0B1A2E; color: #fff; }
-            .loc-stage-num {
-                font-size: 10px;
-                font-weight: 300;
-                letter-spacing: 0.1em;
-                color: #adb5bd;
-            }
-            .loc-stage-btn.active .loc-stage-num { color: #adb5bd; }
-            .loc-gallery-frame { display: none; width: 100%; }
-            .loc-gallery-frame.active { display: block; }
-            .loc-gallery-frame img {
-                border-radius: 8px;
-                box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-                width: 100%;
-            }
-            @media (max-width: 768px) {
-                #loc-stage { flex-direction: column; }
-                #loc-stage .loc-left {
-                    position: static;
-                    width: 100%;
-                    padding: 32px 24px;
-                    border-right: none;
-                    border-bottom: 1px solid rgba(0,0,0,0.07);
-                }
-                #loc-stage .loc-right { padding: 24px; }
-                .loc-stage-label { display: none; }
-                .loc-stage-btn { font-size: 10px; padding: 10px 4px; }
-            }
+            /* Localisation — coded phone-screen mockups (layout chrome is shared with #mr-stage / #sel-stage in css/custom.css) */
+            #loc-stage .panel { align-items: center; }
 
             /* Localisation — Confirmation screen (coded) */
-            .loc-conf-wrap { width: 100%; }
+            .loc-conf-wrap { width: 100%; max-width: 720px; }
             .loc-checkout-steps {
                 display: flex;
                 border: 1px solid #dee2e6;
@@ -250,14 +159,6 @@
                 font-weight: 600;
                 color: #111827;
                 margin: 0 0 14px;
-            }
-            #loc-stage .eyebrow {
-                font-size: 13px;
-                font-weight: 800;
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-                color: #C0C0C0;
-                margin-bottom: 14px;
             }
             .loc-annot-callout {
                 background: #F3F5FF;
@@ -556,42 +457,45 @@
               </div>
             </div>
 
-            <!-- Localisation Gallery -->
-            <div class="container-fluid px-0 mt-4 mb-5" id="loc-stage">
-                <div id="mr-stage">
-                    
-                <!-- LEFT nav -->
-                <aside class="loc-left">
-                    <div>
-                        <p class="loc-label">II. LOCALISATION</p>
-                        <h3>Adapting for Australian Shoppers</h3>
-                        <p class="loc-intro">Localising KrisShop for Australia went beyond currency conversion. Each checkout touchpoint was reviewed and adapted — from how prices display, to how miles and vouchers apply, to what members see after purchase.</p>
-                    </div>
-                    <div class="hint">Click on steps to see the screens →</div>
+            <!-- Localisation Scroll Story -->
+            <div class="container-fluid px-0 mt-4 mb-5">
+              <div id="loc-stage">
+
+                <!-- STATIC LEFT COLUMN -->
+                <aside class="left">
+                  <div>
+                    <p class="loc-label">II. LOCALISATION</p>
+                    <h3>Adapting for Australian Shoppers</h3>
+                    <p class="intro">Localising KrisShop for Australia went beyond currency conversion. Each checkout touchpoint was reviewed and adapted — from how prices display, to how miles and vouchers apply, to what members see after purchase.</p>
+                  </div>
+
+                  <nav class="steps-nav" id="locStepsNav">
+                    <button class="step-btn is-active" data-step="0">
+                      <span class="dot">01</span>
+                      <span class="labels"><span class="lbl">Currency</span><span class="scr">Cart Summary</span></span>
+                    </button>
+                    <button class="step-btn" data-step="1">
+                      <span class="dot">02</span>
+                      <span class="labels"><span class="lbl">Miles Redemption</span><span class="scr">Payment</span></span>
+                    </button>
+                    <button class="step-btn" data-step="2">
+                      <span class="dot">03</span>
+                      <span class="labels"><span class="lbl">Voucher Redemption</span><span class="scr">Payment</span></span>
+                    </button>
+                    <button class="step-btn" data-step="3">
+                      <span class="dot">04</span>
+                      <span class="labels"><span class="lbl">Order Confirmation</span><span class="scr">Confirmation</span></span>
+                    </button>
+                  </nav>
+
+                  <div class="hint">Scroll to step through the flow →</div>
                 </aside>
 
-                <!-- RIGHT content -->
-                <div class="loc-right">
-                        <!-- Stage nav -->
-                        <div class="loc-stage-nav">
-                            <button class="loc-stage-btn active" onclick="locGoTo(0)">
-                                <span class="loc-stage-num">01</span>
-                                <span class="loc-stage-label">Currency</span>
-                            </button>
-                            <button class="loc-stage-btn" onclick="locGoTo(1)">
-                                <span class="loc-stage-num">02</span>
-                                <span class="loc-stage-label">Miles Redemption</span>
-                            </button>
-                            <button class="loc-stage-btn" onclick="locGoTo(2)">
-                                <span class="loc-stage-num">03</span>
-                                <span class="loc-stage-label">Voucher Redemption</span>
-                            </button>
-                            <button class="loc-stage-btn" onclick="locGoTo(3)">
-                                <span class="loc-stage-num">04</span>
-                                <span class="loc-stage-label">Order Confirmation</span>
-                            </button>
-                        </div>
-                        <div class="loc-gallery-frame active" id="loc-0">
+                <!-- STICKY RIGHT COLUMN -->
+                <main class="right">
+                  <div class="pin">
+                    <div class="film text-film">
+                      <div class="panel">
                             <div class="loc-conf-wrap">
                                 <div class="loc-conf-grid">
                                     <div class="loc-conf-card-col">
@@ -635,7 +539,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="loc-gallery-frame" id="loc-1">
+                        <div class="panel">
                             <div class="loc-conf-wrap">
                                 <div class="loc-conf-grid">
                                     <div class="loc-conf-card-col">
@@ -680,7 +584,7 @@ The AU flow needed to surface the tax-saving benefit of miles redemption, which 
                                 </div>
                             </div>
                         </div>
-                        <div class="loc-gallery-frame" id="loc-2">
+                        <div class="panel">
                             <div class="loc-conf-wrap">
                                 <div class="loc-conf-grid">
                                     <div class="loc-conf-card-col">
@@ -725,7 +629,7 @@ The AU flow needed to surface the tax-saving benefit of miles redemption, which 
                                 </div>
                             </div>
                         </div>
-                        <div class="loc-gallery-frame" id="loc-3">
+                        <div class="panel">
                             <div class="loc-conf-wrap">
                                 <div class="loc-conf-grid">
                                     <div class="loc-conf-card-col">
@@ -786,11 +690,19 @@ The AU flow needed to surface the tax-saving benefit of miles redemption, which 
                                 </div>
                             </div>
                         </div>
-                </div><!-- /.loc-right -->
-                
-                </div>
-            </div><!-- /#loc-stage -->
-            
+                    </div>
+                  </div>
+                  <!-- scroll drivers -->
+                  <div class="drivers">
+                    <div class="driver" data-step="0"></div>
+                    <div class="driver" data-step="1"></div>
+                    <div class="driver" data-step="2"></div>
+                    <div class="driver" data-step="3"></div>
+                  </div>
+                </main>
+
+              </div>
+            </div>
 
             <!-- Seller Ecosystem Scroll Story -->
             <div class="container-fluid px-0 mt-4 mb-5">
@@ -910,16 +822,6 @@ The AU flow needed to surface the tax-saving benefit of miles redemption, which 
         <script src="vendor/jquery-easing/jquery.easing.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" defer></script>
         <script src="js/custom.js" defer></script>
-        <script>
-            function locGoTo(idx) {
-                document.querySelectorAll('.loc-stage-btn').forEach(function(b, i) {
-                    b.classList.toggle('active', i === idx);
-                });
-                document.querySelectorAll('.loc-gallery-frame').forEach(function(f, i) {
-                    f.classList.toggle('active', i === idx);
-                });
-            }
-        </script>
     </body>
 
 </html>

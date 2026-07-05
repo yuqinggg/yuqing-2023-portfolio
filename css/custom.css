@@ -1,6 +1,6 @@
 /* ////////////////////////////////////////
-
-Your custom css here
+  Your custom css here
+//////////////////////////////////////// */
 
 /* Hyperlink styling */
 a {
@@ -21,8 +21,6 @@ a {
 #mainNav.navbar-theme-dark .nav-link {
     color: #ffffff !important;
 }
-
-/////////////////////////////////////////*/
 
 /* margin for about page */
 .about-btm-margin{
@@ -216,7 +214,8 @@ a {
 html { scroll-behavior: smooth; }
 
 #mr-stage,
-#sel-stage {
+#sel-stage,
+#loc-stage {
   --accent: #1937CD;
   --ink: #0B0B0B;
   --page-bg: #F1F2F4;
@@ -233,7 +232,8 @@ html { scroll-behavior: smooth; }
 
 /* ---------- LEFT (static) ---------- */
 #mr-stage .left,
-#sel-stage .left {
+#sel-stage .left,
+#loc-stage .left {
   position: sticky;
   top: 0;
   bottom: 0;
@@ -249,7 +249,8 @@ html { scroll-behavior: smooth; }
   z-index: 5;
 }
 #mr-stage .left h3,
-#sel-stage .left h3 {
+#sel-stage .left h3,
+#loc-stage .left h3 {
   font-weight: 700;
   font-size: 26px;
   line-height: 1.2;
@@ -257,7 +258,8 @@ html { scroll-behavior: smooth; }
   color: var(--ink);
 }
 #mr-stage .left .intro,
-#sel-stage .left .intro {
+#sel-stage .left .intro,
+#loc-stage .left .intro {
   font-size: 14px;
   line-height: 1.65;
   color: #6B6B6B;
@@ -265,10 +267,12 @@ html { scroll-behavior: smooth; }
 }
 
 /* step nav */
-#mr-stage .steps-nav { display: flex; flex-direction: column; gap: 2px; margin: 36px 0; }
-#sel-stage .steps-nav { display: flex; flex-direction: column; gap: 2px; margin: 36px 0; }
+#mr-stage .steps-nav,
+#sel-stage .steps-nav,
+#loc-stage .steps-nav { display: flex; flex-direction: column; gap: 2px; margin: 36px 0; }
 #mr-stage .step-btn,
-#sel-stage .step-btn {
+#sel-stage .step-btn,
+#loc-stage .step-btn {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -285,7 +289,8 @@ html { scroll-behavior: smooth; }
   transition: background .25s ease, color .25s ease;
 }
 #mr-stage .step-btn .dot,
-#sel-stage .step-btn .dot {
+#sel-stage .step-btn .dot,
+#loc-stage .step-btn .dot {
   flex: none;
   width: 30px; height: 30px;
   border-radius: 50%;
@@ -294,18 +299,24 @@ html { scroll-behavior: smooth; }
   background: #EDEDED; color: #A0A0A0;
   transition: all .25s ease;
 }
-#mr-stage .step-btn .labels { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
-#sel-stage .step-btn .labels { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
-#mr-stage .step-btn .lbl { font-weight: 700; font-size: 14px; }
-#sel-stage .step-btn .lbl { font-weight: 700; font-size: 14px; }
-#mr-stage .step-btn .scr { font-size: 11.5px; color: #9A9A9A; font-weight: 500; }
-#sel-stage .step-btn .scr { font-size: 11.5px; color: #9A9A9A; font-weight: 500; }
-#mr-stage .step-btn.is-active { background: #F3F5FF; color: var(--ink); }
-#sel-stage .step-btn.is-active { background: #F3F5FF; color: var(--ink); }
-#mr-stage .step-btn.is-active .dot { background: var(--accent); color: #fff; }
-#sel-stage .step-btn.is-active .dot { background: var(--accent); color: #fff; }
-#mr-stage .hint { font-size: 11px; color: #B4B4B4; letter-spacing: 0.04em; }
-#sel-stage .hint { font-size: 11px; color: #B4B4B4; letter-spacing: 0.04em; }
+#mr-stage .step-btn .labels,
+#sel-stage .step-btn .labels,
+#loc-stage .step-btn .labels { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+#mr-stage .step-btn .lbl,
+#sel-stage .step-btn .lbl,
+#loc-stage .step-btn .lbl { font-weight: 700; font-size: 14px; }
+#mr-stage .step-btn .scr,
+#sel-stage .step-btn .scr,
+#loc-stage .step-btn .scr { font-size: 11.5px; color: #9A9A9A; font-weight: 500; }
+#mr-stage .step-btn.is-active,
+#sel-stage .step-btn.is-active,
+#loc-stage .step-btn.is-active { background: #F3F5FF; color: var(--ink); }
+#mr-stage .step-btn.is-active .dot,
+#sel-stage .step-btn.is-active .dot,
+#loc-stage .step-btn.is-active .dot { background: var(--accent); color: #fff; }
+#mr-stage .hint,
+#sel-stage .hint,
+#loc-stage .hint { font-size: 11px; color: #B4B4B4; letter-spacing: 0.04em; }
 
 /* ---------- CENTER (sticky phone) ---------- */
 #mr-stage .center,
@@ -355,8 +366,9 @@ html { scroll-behavior: smooth; }
 }
 
 /* film strips */
-#mr-stage .film { transition: transform 0.85s cubic-bezier(0.65,0.02,0.18,1); }
-#sel-stage .film { transition: transform 0.85s cubic-bezier(0.65,0.02,0.18,1); }
+#mr-stage .film,
+#sel-stage .film,
+#loc-stage .film { transition: transform 0.85s cubic-bezier(0.65,0.02,0.18,1); }
 #mr-stage .phone-film,
 #sel-stage .phone-film {
   position: absolute;
@@ -383,13 +395,15 @@ html { scroll-behavior: smooth; }
 
 /* ---------- RIGHT (sticky, slides in sync) ---------- */
 #mr-stage .right,
-#sel-stage .right {
+#sel-stage .right,
+#loc-stage .right {
   flex: 1;
   min-width: 380px;
   position: relative;
 }
 #mr-stage .pin,
-#sel-stage .pin {
+#sel-stage .pin,
+#loc-stage .pin {
   position: sticky;
   top: 0;
   bottom: 0;
@@ -399,11 +413,13 @@ html { scroll-behavior: smooth; }
   background: var(--page-bg);
 }
 #mr-stage .text-film,
-#sel-stage .text-film {
+#sel-stage .text-film,
+#loc-stage .text-film {
   transform: translateY(calc(var(--step) * -100vh));
 }
 #mr-stage .panel,
-#sel-stage .panel {
+#sel-stage .panel,
+#loc-stage .panel {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -427,5 +443,6 @@ html { scroll-behavior: smooth; }
   margin: 0;
   max-width: 46ch;
 }
-#mr-stage .drivers .driver { height: 100vh; }
-#sel-stage .drivers .driver { height: 100vh; }
+#mr-stage .drivers .driver,
+#sel-stage .drivers .driver,
+#loc-stage .drivers .driver { height: 100vh; }

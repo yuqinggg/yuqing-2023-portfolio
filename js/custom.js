@@ -423,6 +423,7 @@ function initScrollStage(stageId, phoneScaleId, screenPrefix, images, screenTran
   }
 
   function computeScale() {
+    if (!phoneScale) return;
     var s = Math.min((480 - 48) / 417, (window.innerHeight - 48) / 900);
     phoneScale.style.setProperty("--scale", s);
   }
@@ -487,6 +488,8 @@ initScrollStage("mr-stage", "mrPhoneScale", "mr-screen", [
   "img/krisshop-australia/KSO_AU_PDP.jpg",
   "img/krisshop-australia/KSO_AU_Bag.jpg"
 ]);
+
+initScrollStage("loc-stage", null, null, []);
 
 initScrollStage("sel-stage", "selPhoneScale", "sel-screen", [
   "img/krisshop-australia/seller-ecosystem-00.jpg",
