@@ -286,6 +286,18 @@ function deck_render(el) {
     for (var i = 0; i < n; i++) {
         var card = cards[i];
 
+        // Drop any inline geometry isotope left behind so the CSS stack takes
+        // over. The deck reasserts this on every render rather than trusting a
+        // one-off cleanup: isotope keeps its own resize handler and can re-apply
+        // absolute left/top after we have already switched to mobile, which
+        // strands the cards as a spread-out list instead of a stack.
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.width = '';
+        card.style.height = '';
+        card.style.margin = '';
+
         // wrapping is what makes the deck a loop: once `active` moves past this
         // card, its slot comes out the other end and it sits at the back
         var slot = (((i - active) % n) + n) % n;
