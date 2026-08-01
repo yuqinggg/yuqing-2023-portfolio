@@ -7,6 +7,14 @@ a {
     text-decoration: underline;
 }
 
+/* Headline hyperlinks: Newsreader, light italic, no underline */
+.newsreader-link {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-style: italic;
+    text-decoration: none;
+}
+
 /* Navbar theme (automatic, set via data-navbar-theme on #mainNav) */
 #mainNav {
     transition: background-color .3s ease, color .3s ease;
@@ -446,3 +454,93 @@ html { scroll-behavior: smooth; }
 #mr-stage .drivers .driver,
 #sel-stage .drivers .driver,
 #loc-stage .drivers .driver { height: 100vh; }
+
+/* The deck's page indicator is created once and kept in the DOM, so it has to
+   be hidden explicitly everywhere the deck itself isn't used. */
+.deck-dots {
+  display: none;
+}
+
+/* Mobile: looping card deck (replaces the masonry grid below 700px).
+   Every card is stacked in the same spot and positioned by deck_render() in
+   custom.js. Swiping the front card sends it to the back, so the deck cycles
+   forever; the page itself only scrolls when the swipe starts off the card. */
+@media (max-width: 699.98px) {
+  .grid.grid-mobile-stack {
+    --peek: 70px;
+    --gutter: 24px;
+    /* Bootstrap .container side padding, which #portfolio carries */
+    --container-pad: 15px;
+    /* cards are square, so their height is whatever width survives both paddings */
+    --card: calc(100vw - (var(--container-pad) + var(--gutter)) * 2);
+
+    display: block;
+    /* the cards' containing block */
+    position: relative;
+    /* card, plus room for the tucked cards peeking out below it. svh, not vh,
+       so a collapsing URL bar doesn't resize this mid-swipe */
+    height: min(calc(var(--card) + var(--peek) * 2), calc(100svh - 96px));
+    overflow: visible;
+    padding: 0;
+    margin: 0 !important;
+  }
+
+  /* all cards occupy the same square; only their transform differs */
+  .grid.grid-mobile-stack .entry {
+    position: absolute;
+    top: var(--peek);
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    margin: 0 !important;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    transform-origin: 50% 50%;
+    will-change: transform;
+    /* the deck consumes vertical drags that begin on a card. Cards behind the
+       front one are given pointer-events: none, so a swipe there falls through
+       to the page and scrolls it normally. */
+    touch-action: none;
+  }
+
+  /* only applied while settling, so dragging tracks the finger exactly */
+  .grid.grid-mobile-stack .entry.deck-animate {
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1), opacity 0.35s ease;
+  }
+
+  /* page indicator, built by deck_dots_build() in custom.js */
+  .deck-dots {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .deck-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #D2D2D2;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .deck-dot.is-active {
+    background: #8A8A8A;
+    transform: scale(1.15);
+  }
+
+  /* No hover on touch devices, so keep captions visible */
+  .grid.grid-mobile-stack .entry .work-entry-hover {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .grid.grid-mobile-stack .entry .work-entry-title,
+  .grid.grid-mobile-stack .entry .work-entry-cat {
+    opacity: 1;
+    top: 0;
+  }
+}
