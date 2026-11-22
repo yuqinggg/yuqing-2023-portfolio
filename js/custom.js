@@ -12,8 +12,44 @@ $(document).ready(function() {
     // load functions
     imageBG();
     grid();
+    watch_grid_width();
 
 });
+
+/**
+ * The stylesheets are fetched with rel="preload" and swapped in asynchronously,
+ * so the first grid() run can measure the container while Bootstrap's default
+ * max-width is still applied and before style.css widens it. Tiles then keep
+ * that stale width for the life of the page. Re-layout whenever the width the
+ * grid is measured against actually changes — this also covers late font loads.
+ */
+function watch_grid_width() {
+
+    if (!window.ResizeObserver) return;
+
+    var seen = new WeakMap();
+
+    var observer = new ResizeObserver(function(entries) {
+        var changed = false;
+
+        entries.forEach(function(entry) {
+            var width = Math.round(entry.contentRect.width);
+            if (seen.get(entry.target) !== width) {
+                seen.set(entry.target, width);
+                changed = true;
+            }
+        });
+
+        if (changed) grid();
+    });
+
+    // observe the parent: grid() sets a negative margin on .grid itself, so
+    // observing it directly would feed its own writes back into the observer
+    $('.grid').each(function() {
+        if (this.parentNode) observer.observe(this.parentNode);
+    });
+
+}
 
 win.on('load', function() {
 
@@ -24,15 +60,18 @@ win.on('load', function() {
 
 });
 
+var resize_timer;
+
 win.on('resize', function() {
 
     // viewport dimensions
     ww = win.width();
     wh = win.height();
 
-    // load functions
-    grid();
-    
+    // debounce: wait for resizing to settle before re-running layout, so
+    // rapid intermediate widths don't race with isotope's async layout
+    clearTimeout(resize_timer);
+    resize_timer = setTimeout(grid, 150);
 
 });
 
@@ -86,11 +125,17 @@ function imageBG() {
 
 function grid() {
 
+    // Read the width here rather than trusting the resize handler to have run
+    // first. watch_grid_width() calls grid() for things that fire no resize
+    // event at all — a late stylesheet, a font swap — and picking the layout
+    // from a stale ww would leave the wrong breakpoint's styles applied.
+    ww = win.width();
+    wh = win.height();
+
     var container = $('.grid');
 
     for (var i = 0; i < container.length; i++) {
         var active_container = $(container[i]);
-        var container_width = active_container.width();
 
         var items = active_container.find('.entry');
 
@@ -102,8 +147,10 @@ function grid() {
         if (!margin) margin = 0;
         if (!double_height) double_height = 2;
 
-        // set margins to the container
+        // set margins to the container, then measure — measuring first would give a
+        // different (narrower) width on the initial run than on every later run
         active_container.css('margin', -Math.floor(margin / 2) + 'px');
+        var container_width = active_container.width();
 
         if (ww >= 1000) {
             if (!cols) cols = 3;
@@ -113,10 +160,33 @@ function grid() {
             cols = 1;
         }
 
-        var items_width = Math.floor((container_width / cols) - margin);
+        // Mobile: hand the layout over to CSS + the card deck instead of masonry
+        if (cols === 1) {
+            // isotope no-ops safely if it was never initialized on this element
+            try { active_container.isotope('destroy'); } catch (e) {}
+            active_container.addClass('grid-mobile-stack');
+            // clear any inline sizing/positioning isotope may have applied
+            active_container.css({ margin: '', height: '', position: '' });
+            items.css({ width: '', height: '', margin: '', position: '', left: '', top: '', transform: '' });
+            deck_init(active_container);
+            continue;
+        } else {
+            active_container.removeClass('grid-mobile-stack');
+            deck_teardown(active_container);
+        }
+
+        // -1 leaves a pixel of slack per column. Without it cols * (items_width + margin)
+        // exactly equals the container width, and any subpixel rounding makes isotope
+        // fit one column fewer — collapsing the whole grid into a single column.
+        var items_width = Math.floor((container_width / cols) - margin) - 1;
         var items_height = Math.floor(items_width * height);
         var items_double_height = items_height * double_height;
         var items_margin = Math.floor(margin / 2);
+
+        // Rebuild from scratch. Re-passing options to a live instance keeps the old
+        // column geometry cached, which strands tiles at the previous breakpoint's
+        // offsets when the viewport changes.
+        try { active_container.isotope('destroy'); } catch (e) {}
 
         items.each(function() {
             $(this).css('width', items_width + 'px');
@@ -131,7 +201,9 @@ function grid() {
         // isotope
         active_container.isotope({
             itemSelector: '.entry',
-            transitionDuration: '.2s',
+            // no animated reflow: on resize the tween can be interrupted and leave
+            // items stranded mid-transform, stacking them into the first column
+            transitionDuration: 0,
             hiddenStyle: {
                 opacity: 0
             },
@@ -140,7 +212,7 @@ function grid() {
             },
             masonry: {
                 columnWidth: items_width + margin
-                
+
             }
         });
 
@@ -157,6 +229,263 @@ function grid() {
             });
         });
     };
+
+}
+
+
+/** MOBILE CARD DECK */
+/** ===================== */
+
+/**
+ * Every card sits stacked in the same square and is placed purely by transform.
+ * A card's "slot" is how far back in the deck it currently sits: slot 0 is the
+ * front card, 1/2/3 are tucked behind it, and slots wrap around — so the card
+ * swiped off the top becomes the last slot and the deck loops forever.
+ *
+ * `d` is that slot plus the in-progress drag, so it goes fractional while a
+ * finger is down and the whole deck interpolates smoothly.
+ *
+ * This is driven by touch rather than a scroll container: a looping deck has no
+ * scroll extent, and we need swipes that start on the card to cycle it while
+ * swipes that start beside it still scroll the page.
+ */
+
+// how far below the front card each successive card peeks out
+function deck_offset(d) {
+    if (d < 0) return d * 60;
+    return 26 * Math.min(d, 1) +
+           22 * Math.max(0, Math.min(d - 1, 1)) +
+           16 * Math.max(0, Math.min(d - 2, 1));
+}
+
+// cards further back sit slightly smaller, which reads as depth
+function deck_scale(d) {
+    if (d < 0) return 1;
+    return 1 -
+           0.05 * Math.min(d, 1) -
+           0.05 * Math.max(0, Math.min(d - 1, 1)) -
+           0.03 * Math.max(0, Math.min(d - 2, 1));
+}
+
+// the outgoing card fades as it leaves; anything past the third is not drawn
+function deck_opacity(d) {
+    if (d < 0) return Math.max(0, 1 + d * 1.2);
+    if (d > 3) return Math.max(0, 1 - (d - 3));
+    return 1;
+}
+
+function deck_render(el) {
+
+    var cards = el.querySelectorAll('.entry');
+    var n = cards.length;
+    if (!n) return;
+
+    var active = el.deck_active || 0;
+    var progress = el.deck_progress || 0;
+
+    for (var i = 0; i < n; i++) {
+        var card = cards[i];
+
+        // Drop any inline geometry isotope left behind so the CSS stack takes
+        // over. The deck reasserts this on every render rather than trusting a
+        // one-off cleanup: isotope keeps its own resize handler and can re-apply
+        // absolute left/top after we have already switched to mobile, which
+        // strands the cards as a spread-out list instead of a stack.
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.width = '';
+        card.style.height = '';
+        card.style.margin = '';
+
+        // wrapping is what makes the deck a loop: once `active` moves past this
+        // card, its slot comes out the other end and it sits at the back
+        var slot = (((i - active) % n) + n) % n;
+        var d = slot - progress;
+
+        // each card keeps its own tilt, exaggerated deeper into the stack
+        var tilt = (i % 2 ? 1.4 : -1.4) * (1 + 0.3 * Math.min(Math.max(d, 0), 3));
+
+        card.style.transform =
+            'translateY(' + deck_offset(d).toFixed(2) + 'px)' +
+            ' scale(' + deck_scale(d).toFixed(3) + ')' +
+            ' rotate(' + tilt.toFixed(2) + 'deg)';
+        card.style.opacity = deck_opacity(d).toFixed(3);
+        card.style.zIndex = d < 0 ? 200 : Math.max(0, 100 - Math.round(d * 10));
+        // only the front card takes taps and drags; everything behind it lets
+        // touches through to the page so margins still scroll
+        card.style.pointerEvents = Math.abs(d) < 0.5 ? '' : 'none';
+    }
+
+    // the dot flips as soon as the drag passes halfway, so the indicator keeps
+    // up with the finger rather than waiting for the card to land
+    var dots = el.deck_dots;
+    if (dots) {
+        var shown = (((active + Math.round(progress)) % n) + n) % n;
+        for (var k = 0; k < dots.children.length; k++) {
+            dots.children[k].classList.toggle('is-active', k === shown);
+        }
+    }
+
+}
+
+// transitions are only on while the deck settles, so a drag tracks the finger
+function deck_animate(el, on) {
+    var cards = el.querySelectorAll('.entry');
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.toggle('deck-animate', !!on);
+    }
+}
+
+function deck_step(el, dir) {
+    var n = el.querySelectorAll('.entry').length;
+    if (!n) return;
+    el.deck_active = (((el.deck_active || 0) + dir) % n + n) % n;
+    el.deck_progress = 0;
+    deck_animate(el, true);
+    deck_render(el);
+}
+
+// how far the finger must travel for one full card advance
+function deck_travel(el) {
+    var card = el.querySelector('.entry');
+    return card ? Math.max(60, card.offsetHeight * 0.45) : 140;
+}
+
+function deck_bind(el) {
+
+    var dragging = false;
+    var start_y = 0;
+    var moved = 0;
+
+    // a swipe only belongs to the deck if it began on the front card
+    function on_front_card(x, y) {
+        var cards = el.querySelectorAll('.entry');
+        var front = cards[(el.deck_active || 0) % (cards.length || 1)];
+        if (!front) return false;
+        var r = front.getBoundingClientRect();
+        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    }
+
+    function finish() {
+        if (!dragging) return;
+        dragging = false;
+
+        var p = el.deck_progress || 0;
+        deck_animate(el, true);
+
+        if (p > 0.25) deck_step(el, 1);
+        else if (p < -0.25) deck_step(el, -1);
+        else { el.deck_progress = 0; deck_render(el); }
+    }
+
+    el.addEventListener('touchstart', function(e) {
+        var t = e.touches[0];
+        if (!on_front_card(t.clientX, t.clientY)) return;
+        dragging = true;
+        start_y = t.clientY;
+        moved = 0;
+        deck_animate(el, false);
+    }, { passive: true });
+
+    // not passive: this is the handler that keeps the page still while the
+    // deck is being dragged
+    el.addEventListener('touchmove', function(e) {
+        if (!dragging) return;
+        var dy = e.touches[0].clientY - start_y;
+        moved = Math.abs(dy);
+        e.preventDefault();
+        el.deck_progress = Math.max(-1, Math.min(1, -dy / deck_travel(el)));
+        deck_render(el);
+    }, { passive: false });
+
+    el.addEventListener('touchend', finish);
+    el.addEventListener('touchcancel', finish);
+
+    // a drag must not also follow the card's link
+    el.addEventListener('click', function(e) {
+        if (moved > 10) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        moved = 0;
+    }, true);
+
+    // trackpad / mouse wheel over the card cycles it too, so the deck behaves
+    // the same way in a desktop device-emulator
+    var wheel_lock = false;
+    el.addEventListener('wheel', function(e) {
+        if (!on_front_card(e.clientX, e.clientY)) return;
+        e.preventDefault();
+        if (wheel_lock || Math.abs(e.deltaY) < 8) return;
+        wheel_lock = true;
+        setTimeout(function() { wheel_lock = false; }, 340);
+        deck_step(el, e.deltaY > 0 ? 1 : -1);
+    }, { passive: false });
+
+}
+
+/**
+ * Page indicator. Built here rather than in the markup so it always matches the
+ * number of works, and inserted after the deck so it sits clear of the cards.
+ * It is decorative — the cards themselves are the real navigation — so it is
+ * hidden from assistive tech.
+ */
+function deck_dots_build(el) {
+
+    var n = el.querySelectorAll('.entry').length;
+    if (!n) return;
+
+    var dots = el.deck_dots;
+
+    if (!dots) {
+        dots = document.createElement('div');
+        dots.className = 'deck-dots';
+        dots.setAttribute('aria-hidden', 'true');
+        el.parentNode.insertBefore(dots, el.nextSibling);
+        el.deck_dots = dots;
+    }
+
+    if (dots.childElementCount !== n) {
+        dots.innerHTML = '';
+        for (var i = 0; i < n; i++) {
+            dots.appendChild(document.createElement('span')).className = 'deck-dot';
+        }
+    }
+
+}
+
+function deck_init(container) {
+
+    var el = container[0];
+    if (!el) return;
+
+    if (el.deck_active == null) el.deck_active = 0;
+    el.deck_progress = 0;
+
+    if (!el.deck_bound) {
+        el.deck_bound = true;
+        deck_bind(el);
+    }
+
+    deck_dots_build(el);
+
+    // no animation for the initial placement or a resize reflow
+    deck_animate(el, false);
+    deck_render(el);
+
+}
+
+function deck_teardown(container) {
+
+    container.find('.entry')
+        .removeClass('deck-animate')
+        .css({
+            transform: '',
+            opacity: '',
+            zIndex: '',
+            pointerEvents: ''
+        });
 
 }
 

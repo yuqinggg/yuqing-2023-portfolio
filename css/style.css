@@ -227,7 +227,9 @@ Header intro
 }
 
 .headline-subtitle {
-    font-size: 24px
+    /* scales down on tablet/mobile, caps at the desktop size */
+    font-size: clamp(20px, 1.8vw + 12px, 32px);
+    line-height: 1.2;
 }
 
 
